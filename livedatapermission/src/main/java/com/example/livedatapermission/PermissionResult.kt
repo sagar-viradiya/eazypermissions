@@ -1,8 +1,8 @@
 package com.example.livedatapermission
 
-sealed class PermissionResult(requestId: Int) {
-    class PermissionGranted(requestId: Int) : PermissionResult(requestId)
-    class PermissionDenied(requestId: Int) : PermissionResult(requestId)
-    class ShowRational(requestId: Int) : PermissionResult(requestId)
-    class PermissionDeniedPermanently(requestId: Int) : PermissionResult(requestId)
+sealed class PermissionResult {
+    class PermissionGranted(val requestId: Int) : PermissionResult()
+    class PermissionDenied(val requestId: Int) : PermissionResult()
+    class ShowRational(val requestId: Int) : PermissionResult()
+    class PermissionDeniedPermanently(val requestId: Int) : PermissionResult()
 }
