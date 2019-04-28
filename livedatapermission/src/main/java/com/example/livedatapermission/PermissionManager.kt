@@ -77,7 +77,7 @@ class PermissionManager : Fragment() {
          * A static factory method to request permission from activity/fragment.
          * Your activity/fragment must implement [PermissionObserver]
          *
-         * @param activity an instance of [AppCompatActivity] which also [PermissionObserver]
+         * @param activity an instance of [AppCompatActivity] which is also [PermissionObserver]
          * @param requestId Request ID for permission request
          * @param permissions Permission(s) to request
          *
