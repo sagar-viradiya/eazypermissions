@@ -11,6 +11,9 @@ import android.support.v7.app.AppCompatActivity
 import com.example.livedatapermission.model.PermissionResult
 
 /**
+ * Permission manager which handles checking permission is granted or not and if not then will request permission.
+ * This is nothing but a headless fragment which wraps the boilerplate code for checking and requesting permission
+ * and expose the result of permission request as [LiveData]
  * A simple [Fragment] subclass.
  */
 class PermissionManager : Fragment() {
@@ -19,12 +22,12 @@ class PermissionManager : Fragment() {
         SingleLiveEvent<PermissionResult>()
     }
 
+    private val rationalRequest = mutableMapOf<Int, Boolean>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
     }
-
-    private val rationalRequest = mutableMapOf<Int, Boolean>()
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
@@ -70,6 +73,16 @@ class PermissionManager : Fragment() {
 
         private const val TAG = "PermissionManager"
 
+        /**
+         * A static factory method to request permission from activity/fragment.
+         * Your activity/fragment must implement [PermissionObserver]
+         *
+         * @param activity an instance of [AppCompatActivity] which also [PermissionObserver]
+         * @param requestId Request ID for permission request
+         * @param permissions Permission(s) to request
+         *
+         * @throws [IllegalArgumentException] if your activity/fragment doesn't implement [PermissionObserver]
+         */
         @JvmStatic
         @MainThread
         fun requestPermissions(activity: AppCompatActivity, requestId: Int, vararg permissions: String) {
@@ -90,6 +103,11 @@ class PermissionManager : Fragment() {
         }
     }
 
+    /**
+     * Interface definition for a callback to get [LiveData] of [PermissionResult]
+     *
+     * Implement this interface to get [LiveData] for observing permission request result.
+     */
     interface PermissionObserver {
         fun setupObserver(permissionResultLiveData: LiveData<PermissionResult>)
     }
