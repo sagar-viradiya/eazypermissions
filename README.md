@@ -1,7 +1,7 @@
 # LiveData Runtime Permission
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/sagar-viradiya/livedata-permission/blob/master/LICENSE)
 
-A lightweight Android library which wraps boilerplate code of runtime permission and expose the result as LiveData. With just one simple step(implementing an interface) you are ready to request permission and observe the result of request.
+A lightweight(Yes, we care about method count and memory usage) Android library which wraps boilerplate code of runtime permission and expose the result as LiveData. With just one simple step(implementing an interface) you are ready to request permission and observe the result of request.
 
 ## Requesting permission
 Requesting permission is just a simple method call from your Activity/Fragment. It takes 3 parameters.
