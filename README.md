@@ -1,14 +1,13 @@
 # LiveData Runtime Permission
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/sagar-viradiya/livedata-permission/blob/master/LICENSE)
 
-A light weight 
-Android library which wraps boilerplate code of runtime permission and expose the result as LiveData. With just one simple step you are ready to request permission and observe the result of request.
+A lightweight Android library which wraps boilerplate code of runtime permission and expose the result as LiveData. With just one simple step(implementing an interface) you are ready to request permission and observe the result of request.
 
 ## Requesting permission
 Requesting permission is just a simple method call from your Activity/Fragment. It takes 3 parameters.
-1. Instance of AppCompactActivity
-2. Request id
-3. varargs of permission you want to request
+1. An instance of AppCompactActivity or Fragment depending from where you are requesting permission.
+2. Request id.
+3. varargs of permission you want to request.
 
 This is how you request for single permission from your Activity/Fragment.
 ```kotlin
@@ -30,7 +29,7 @@ PermissionManager.requestPermissions(
 ```
 
 ## Observing permission request result
-Your Activity/Fragment must implement [PermissionObserver]() which expose LiveData<[PermissionResult]()>. Here is the defination of [PermissionObserver]()
+Your Activity/Fragment must implement [PermissionObserver]() which expose LiveData<[PermissionResult]()>. Here is the definition of [PermissionObserver]()
 ```kotlin
 /**
  * Interface definition for a callback to get [LiveData] of [PermissionResult]
@@ -72,9 +71,12 @@ override fun setupObserver(permissionResultLiveData: LiveData<PermissionResult>)
     })
 }
 ```
-Library will take care of Activity/Fragment recreation so even if user rotate screen or due to some other reason if your Activity/Fragment gets recreated it will call `setupObserver` method to register new oberver of LiveData.
+> It is mandatory to implement [PermissionObserver]() from where you are requesting permission(either Activity or Fragment).
+If you don't then library will throw `IllegalArgumentException` stating that you have to implement [PermissionObserver]()
 
-Library expose [PermissionResult]() as result of permission request which is nothing but simple sealed class.
+Library will take care of Activity/Fragment recreation so even if user rotates screen or due to some other reason if your Activity/Fragment gets recreated it will call `setupObserver` method to register new observer of LiveData.
+
+Library exposes [PermissionResult]() as result of permission request which is nothing but simple sealed class.
 ```kotlin
 sealed class PermissionResult {
     class PermissionGranted(val requestId: Int) : PermissionResult()
