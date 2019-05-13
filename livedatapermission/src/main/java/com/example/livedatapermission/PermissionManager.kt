@@ -13,7 +13,7 @@ import com.example.livedatapermission.model.PermissionResult
 /**
  * Permission manager which handles checking permission is granted or not and if not then will request permission.
  * This is nothing but a headless fragment which wraps the boilerplate code for checking and requesting permission
- * and expose the result of permission request as [LiveData]
+ * and expose the result of permission request as [LiveData].
  * A simple [Fragment] subclass.
  */
 class PermissionManager : Fragment() {
@@ -23,6 +23,7 @@ class PermissionManager : Fragment() {
     }
 
     private val rationalRequest = mutableMapOf<Int, Boolean>()
+    private var isRequestFromFragment = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +67,11 @@ class PermissionManager : Fragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        (context as PermissionObserver).setupObserver(permissionResultLiveEvent)
+        if (isRequestFromFragment) {
+            (parentFragment as PermissionObserver).setupObserver(permissionResultLiveEvent)
+        } else {
+            (context as PermissionObserver).setupObserver(permissionResultLiveEvent)
+        }
     }
 
     companion object {
@@ -74,14 +79,14 @@ class PermissionManager : Fragment() {
         private const val TAG = "PermissionManager"
 
         /**
-         * A static factory method to request permission from activity/fragment.
-         * Your activity/fragment must implement [PermissionObserver]
+         * A static factory method to request permission from activity.
+         * Your activity must implement [PermissionObserver]
          *
          * @param activity an instance of [AppCompatActivity] which is also [PermissionObserver]
          * @param requestId Request ID for permission request
          * @param permissions Permission(s) to request
          *
-         * @throws [IllegalArgumentException] if your activity/fragment doesn't implement [PermissionObserver]
+         * @throws [IllegalArgumentException] if your activity doesn't implement [PermissionObserver]
          */
         @JvmStatic
         @MainThread
@@ -93,10 +98,40 @@ class PermissionManager : Fragment() {
                 )
             } else {
                 if (activity !is PermissionObserver) {
-                    throw IllegalArgumentException("Activity/Fragment must implement PermissionObserver")
+                    throw IllegalArgumentException("Activity must implement PermissionObserver")
                 } else {
                     val permissionManager = PermissionManager()
                     activity.supportFragmentManager.beginTransaction().add(permissionManager, TAG).commitNow()
+                    permissionManager.requestPermissions(requestId, *permissions)
+                }
+            }
+        }
+
+        /**
+         * A static factory method to request permission from fragment.
+         * Your fragment must implement [PermissionObserver]
+         *
+         * @param fragment an instance of [Fragment] which is also [PermissionObserver]
+         * @param requestId Request ID for permission request
+         * @param permissions Permission(s) to request
+         *
+         * @throws [IllegalArgumentException] if your fragment doesn't implement [PermissionObserver]
+         */
+        @JvmStatic
+        @MainThread
+        fun requestPermissions(fragment: Fragment, requestId: Int, vararg permissions: String) {
+            if (fragment.childFragmentManager.findFragmentByTag(TAG) != null) {
+                (fragment.childFragmentManager.findFragmentByTag(TAG) as PermissionManager).requestPermissions(
+                    requestId,
+                    *permissions
+                )
+            } else {
+                if (fragment !is PermissionObserver) {
+                    throw IllegalArgumentException("Fragment must implement PermissionObserver")
+                } else {
+                    val permissionManager = PermissionManager()
+                    permissionManager.isRequestFromFragment = true
+                    fragment.childFragmentManager.beginTransaction().add(permissionManager, TAG).commitNow()
                     permissionManager.requestPermissions(requestId, *permissions)
                 }
             }
