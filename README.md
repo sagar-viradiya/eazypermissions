@@ -80,11 +80,12 @@ Library exposes [PermissionResult]() as result of permission request which is no
 ```kotlin
 sealed class PermissionResult {
     class PermissionGranted(val requestId: Int) : PermissionResult()
-    class PermissionDenied(val requestId: Int) : PermissionResult()
+    class PermissionDenied(val requestId: Int, val deniedPermissions: List<String>) : PermissionResult()
     class ShowRational(val requestId: Int) : PermissionResult()
-    class PermissionDeniedPermanently(val requestId: Int) : PermissionResult()
+    class PermissionDeniedPermanently(val requestId: Int, val permanentlyDeniedPermissions: List<String>) : PermissionResult()
 }
 ```
+Notice `PermissionDenied` and `PermissionDeniedPermanently` are also exposing list of denied permissions and permanently denied permissions respectively so that you can decide your flow based on denied permissions if you want to.
 
 # License
 
