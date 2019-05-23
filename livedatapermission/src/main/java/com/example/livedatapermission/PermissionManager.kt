@@ -23,7 +23,6 @@ class PermissionManager : Fragment() {
     }
 
     private val rationalRequest = mutableMapOf<Int, Boolean>()
-    private var isRequestFromFragment = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +33,15 @@ class PermissionManager : Fragment() {
         if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
             permissionResultLiveEvent.postValue(PermissionResult.PermissionGranted(requestCode))
         } else if (permissions.any { shouldShowRequestPermissionRationale(it) }) {
-            permissionResultLiveEvent.postValue(PermissionResult.PermissionDenied(requestCode))
+            permissionResultLiveEvent.postValue(
+                PermissionResult.PermissionDenied(requestCode,
+                    permissions.filterIndexed { index, _ -> grantResults[index] == PackageManager.PERMISSION_DENIED })
+            )
         } else {
-            permissionResultLiveEvent.postValue(PermissionResult.PermissionDeniedPermanently(requestCode))
+            permissionResultLiveEvent.postValue(
+                PermissionResult.PermissionDeniedPermanently(requestCode,
+                    permissions.filterIndexed { index, _ -> grantResults[index] == PackageManager.PERMISSION_DENIED })
+            )
         }
     }
 
@@ -67,7 +72,7 @@ class PermissionManager : Fragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (isRequestFromFragment) {
+        if (arguments?.getBoolean(IS_REQ_FROM_FRAGMENT) == true) {
             (parentFragment as PermissionObserver).setupObserver(permissionResultLiveEvent)
         } else {
             (context as PermissionObserver).setupObserver(permissionResultLiveEvent)
@@ -77,6 +82,7 @@ class PermissionManager : Fragment() {
     companion object {
 
         private const val TAG = "PermissionManager"
+        private const val IS_REQ_FROM_FRAGMENT = "IS_REQ_FROM_FRAGMENT"
 
         /**
          * A static factory method to request permission from activity.
@@ -129,8 +135,11 @@ class PermissionManager : Fragment() {
                 if (fragment !is PermissionObserver) {
                     throw IllegalArgumentException("Fragment must implement PermissionObserver")
                 } else {
-                    val permissionManager = PermissionManager()
-                    permissionManager.isRequestFromFragment = true
+                    val permissionManager = PermissionManager().apply {
+                        arguments = Bundle().apply {
+                            putBoolean(IS_REQ_FROM_FRAGMENT, true)
+                        }
+                    }
                     fragment.childFragmentManager.beginTransaction().add(permissionManager, TAG).commitNow()
                     permissionManager.requestPermissions(requestId, *permissions)
                 }
