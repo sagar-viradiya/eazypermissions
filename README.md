@@ -87,6 +87,9 @@ sealed class PermissionResult {
 ```
 Notice `PermissionDenied` and `PermissionDeniedPermanently` are also exposing list of denied permissions and permanently denied permissions respectively so that you can decide your flow based on denied permissions if you want to.
 
+## Screenshots of sample
+To do - Add screenshots once done with sample app
+
 # License
 
 ```
