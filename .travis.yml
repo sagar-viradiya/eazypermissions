@@ -7,7 +7,7 @@ android:
     - platform-tools
 
     # The BuildTools version used by your project
-    - build-tools-29.0.0-rc3
+    - build-tools-29.0.0 rc3
 
     # The SDK version used to compile your project
     - android-28
@@ -26,3 +26,4 @@ before_script:
   - ./gradlew clean
 script:
   - ./gradlew build check
+  - ./gradlew
