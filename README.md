@@ -29,7 +29,7 @@ PermissionManager.requestPermissions(
 ```
 
 ## Observing permission request result
-Your Activity/Fragment must implement [PermissionObserver]() which expose LiveData<[PermissionResult]()>. Here is the definition of [PermissionObserver]()
+Your Activity/Fragment must implement [PermissionObserver](livedatapermission/src/main/java/com/example/livedatapermission/PermissionManager.kt) which expose LiveData<[PermissionResult](livedatapermission/src/main/java/com/example/livedatapermission/model/PermissionResult.kt)>. Here is the definition of [PermissionObserver](livedatapermission/src/main/java/com/example/livedatapermission/PermissionManager.kt)
 ```kotlin
 /**
  * Interface definition for a callback to get [LiveData] of [PermissionResult]
@@ -40,7 +40,7 @@ interface PermissionObserver {
     fun setupObserver(permissionResultLiveData: LiveData<PermissionResult>)
 }
 ```
-Just as you would observe other LiveData you can observe LiveData<[PermissionResult]()> as follow
+Just as you would observe other LiveData you can observe LiveData<[PermissionResult](livedatapermission/src/main/java/com/example/livedatapermission/model/PermissionResult.kt)> as follow
 ```kotlin
 override fun setupObserver(permissionResultLiveData: LiveData<PermissionResult>) {
     permissionResultLiveData.observe(this, Observer<PermissionResult> {
@@ -71,12 +71,12 @@ override fun setupObserver(permissionResultLiveData: LiveData<PermissionResult>)
     })
 }
 ```
-> It is mandatory to implement [PermissionObserver]() from where you are requesting permission(either Activity or Fragment).
-If you don't then library will throw `IllegalArgumentException` stating that you have to implement [PermissionObserver]()
+> It is mandatory to implement [PermissionObserver](livedatapermission/src/main/java/com/example/livedatapermission/PermissionManager.kt) from where you are requesting permission(either Activity or Fragment).
+If you don't then library will throw `IllegalArgumentException` stating that you have to implement [PermissionObserver](livedatapermission/src/main/java/com/example/livedatapermission/PermissionManager.kt)
 
 Library will take care of Activity/Fragment recreation so even if user rotates screen or due to some other reason if your Activity/Fragment gets recreated it will call `setupObserver` method to register new observer of LiveData.
 
-Library exposes [PermissionResult]() as result of permission request which is nothing but simple sealed class.
+Library exposes [PermissionResult](livedatapermission/src/main/java/com/example/livedatapermission/model/PermissionResult.kt) as result of permission request which is nothing but simple sealed class.
 ```kotlin
 sealed class PermissionResult {
     class PermissionGranted(val requestId: Int) : PermissionResult()
