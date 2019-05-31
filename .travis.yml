@@ -29,4 +29,3 @@ before_script:
   - ./gradlew clean
 script:
   - ./gradlew build check
-  - ./gradlew
