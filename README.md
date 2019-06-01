@@ -1,4 +1,4 @@
-# LiveData Runtime Permission
+# Easy Runtime Permission
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/sagar-viradiya/livedata-permission/blob/master/LICENSE) [![Build Status](https://travis-ci.com/sagar-viradiya/livedata-permission.svg?token=VppdY5VoQBEp72REmqxi&branch=master)](https://travis-ci.com/sagar-viradiya/livedata-permission)
 
 A lightweight(Yes, we care about method count and memory usage) Android library which wraps boilerplate code of runtime permission and expose the result as LiveData. With just one simple step(implementing an interface) you are ready to request permission and observe the result of request.
