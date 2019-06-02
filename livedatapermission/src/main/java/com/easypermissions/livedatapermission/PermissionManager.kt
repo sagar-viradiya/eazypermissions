@@ -5,6 +5,7 @@ import android.content.Context
 import android.support.annotation.MainThread
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import com.easypermissions.common.BasePermissionManager
 import com.easypermissions.common.model.PermissionResult
 
 /**
@@ -13,7 +14,7 @@ import com.easypermissions.common.model.PermissionResult
  * and expose the result of permission request as [LiveData].
  * A simple [Fragment] subclass.
  */
-class PermissionManager : com.easypermissions.common.PermissionManager() {
+class PermissionManager : BasePermissionManager() {
 
     private val permissionResultLiveEvent: SingleLiveEvent<PermissionResult> by lazy {
         SingleLiveEvent<PermissionResult>()

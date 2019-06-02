@@ -11,7 +11,7 @@ import com.easypermissions.common.model.PermissionResult
  * A simple [Fragment] subclass.
  *
  */
-abstract class PermissionManager : Fragment() {
+abstract class BasePermissionManager : Fragment() {
 
     private val rationalRequest = mutableMapOf<Int, Boolean>()
 

@@ -2,6 +2,7 @@ package com.easypermissions.coroutinespermission
 
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import com.easypermissions.common.BasePermissionManager
 import com.easypermissions.common.model.PermissionResult
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
@@ -11,7 +12,7 @@ import kotlinx.coroutines.withContext
  * A simple [Fragment] subclass.
  *
  */
-class PermissionManager : com.easypermissions.common.PermissionManager() {
+class PermissionManager : BasePermissionManager() {
 
     private val completableDeferred = CompletableDeferred<PermissionResult>()
 
