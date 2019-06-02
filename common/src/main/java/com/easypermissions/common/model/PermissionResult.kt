@@ -1,4 +1,4 @@
-package com.example.livedatapermission.model
+package com.easypermissions.common.model
 
 sealed class PermissionResult {
     class PermissionGranted(val requestId: Int) : PermissionResult()
