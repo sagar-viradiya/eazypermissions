@@ -69,7 +69,7 @@ class PermissionManager : com.easypermissions.common.PermissionManager() {
         @JvmStatic
         @MainThread
         fun requestPermissions(fragment: Fragment, requestId: Int, vararg permissions: String) {
-            requestPermissions(
+            _requestPermissions(
                 fragment,
                 requestId,
                 *permissions
