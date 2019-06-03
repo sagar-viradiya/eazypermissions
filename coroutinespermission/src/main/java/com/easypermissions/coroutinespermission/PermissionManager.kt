@@ -14,7 +14,7 @@ import kotlinx.coroutines.withContext
  */
 class PermissionManager : BasePermissionManager() {
 
-    private val completableDeferred = CompletableDeferred<PermissionResult>()
+    private lateinit var completableDeferred: CompletableDeferred<PermissionResult>
 
     override fun onPermissionResult(permissionResult: PermissionResult) {
         completableDeferred.complete(permissionResult)
@@ -56,13 +56,16 @@ class PermissionManager : BasePermissionManager() {
             }
             return if (fragmentManager.findFragmentByTag(TAG) != null) {
                 val permissionManager = fragmentManager.findFragmentByTag(TAG) as PermissionManager
+                permissionManager.completableDeferred = CompletableDeferred()
                 permissionManager.requestPermissions(
                     requestId,
                     *permissions
                 )
                 permissionManager.completableDeferred.await()
             } else {
-                val permissionManager = PermissionManager()
+                val permissionManager = PermissionManager().apply {
+                    completableDeferred = CompletableDeferred()
+                }
                 fragmentManager.beginTransaction().add(permissionManager,
                     TAG
                 ).commitNow()
@@ -73,4 +76,10 @@ class PermissionManager : BasePermissionManager() {
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        if (completableDeferred.isActive) {
+            completableDeferred.cancel()
+        }
+    }
 }
