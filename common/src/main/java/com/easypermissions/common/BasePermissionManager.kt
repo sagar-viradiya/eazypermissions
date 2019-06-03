@@ -49,7 +49,7 @@ abstract class BasePermissionManager : Fragment() {
 
         when {
             notGranted.isEmpty() -> onPermissionResult(PermissionResult.PermissionGranted(requestId))
-            shouldShowRequestPermissionRationale(notGranted[0]) -> {
+            notGranted.any { shouldShowRequestPermissionRationale(it) } -> {
                 rationalRequest[requestId] = true
                 onPermissionResult(PermissionResult.ShowRational(requestId))
             }
