@@ -9,11 +9,11 @@
         android:id="@+id/coroutinesFragment"
         android:name="com.example.sample.CoroutinesFragment"
         android:label="Coroutines Permissions"
-        tools:layout="@layout/fragment_coroutines" />
+        tools:layout="@layout/fragment_ui" />
     <fragment
         android:id="@+id/livedataFragment"
         android:name="com.example.sample.LivedataFragment"
         android:label="Livedata Permissions"
-        tools:layout="@layout/fragment_livedata" />
+        tools:layout="@layout/fragment_ui" />
 
 </navigation>
