@@ -1,7 +1,7 @@
 # Easy Runtime Permission
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/sagar-viradiya/livedata-permission/blob/master/LICENSE) [![Build Status](https://travis-ci.com/sagar-viradiya/livedata-permission.svg?token=VppdY5VoQBEp72REmqxi&branch=master)](https://travis-ci.com/sagar-viradiya/livedata-permission)
 
-A lightweight Android library which wraps boilerplate code of runtime permission with coroutines(No callbacks yay :tada:) and LiveData support.
+A lightweight Android library which wraps boilerplate code of runtime permission and allows you to request permissions from coroutines (No callbacks yay :tada:) or request and observe permissions through LiveData.
 
 ## Coroutines support
 Requesting permission is just a simple function call to suspending function from your coroutines or suspending function which will return [`PermissionResult`](). It takes 3 parameters.
