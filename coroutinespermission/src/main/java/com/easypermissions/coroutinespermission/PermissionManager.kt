@@ -66,7 +66,8 @@ class PermissionManager : BasePermissionManager() {
                 val permissionManager = PermissionManager().apply {
                     completableDeferred = CompletableDeferred()
                 }
-                fragmentManager.beginTransaction().add(permissionManager,
+                fragmentManager.beginTransaction().add(
+                    permissionManager,
                     TAG
                 ).commitNow()
                 permissionManager.requestPermissions(requestId, *permissions)
