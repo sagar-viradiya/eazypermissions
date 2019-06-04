@@ -55,13 +55,25 @@ class CoroutinesFragment : Fragment() {
             }
         }
 
-        location_contact_permission_btn.setOnClickListener {
+        camera_permission_btn.setOnClickListener {
             coroutineScope.launch {
                 withContext(Dispatchers.Main) {
                     handleResult(PermissionManager.requestPermissions(
                         this@CoroutinesFragment, 3,
+                        Manifest.permission.CAMERA
+                    ))
+                }
+            }
+        }
+
+        location_contact_camera_permission_btn.setOnClickListener {
+            coroutineScope.launch {
+                withContext(Dispatchers.Main) {
+                    handleResult(PermissionManager.requestPermissions(
+                        this@CoroutinesFragment, 4,
                         Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.READ_CONTACTS
+                        Manifest.permission.READ_CONTACTS,
+                        Manifest.permission.CAMERA
                     ))
                 }
             }
@@ -106,8 +118,18 @@ class CoroutinesFragment : Fragment() {
                                     handleResult(PermissionManager.requestPermissions(
                                         this@CoroutinesFragment,
                                         3,
+                                        Manifest.permission.CAMERA
+                                    ))
+                                }
+                            }
+                            4 -> {
+                                coroutineScope.launch(Dispatchers.Main) {
+                                    handleResult(PermissionManager.requestPermissions(
+                                        this@CoroutinesFragment,
+                                        4,
                                         Manifest.permission.ACCESS_FINE_LOCATION,
-                                        Manifest.permission.READ_CONTACTS
+                                        Manifest.permission.READ_CONTACTS,
+                                        Manifest.permission.CAMERA
                                     ))
                                 }
                             }

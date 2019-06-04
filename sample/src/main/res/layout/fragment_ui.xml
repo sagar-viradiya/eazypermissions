@@ -20,9 +20,15 @@
         android:text="Req. Contact Permission" />
 
     <Button
-        android:id="@+id/location_contact_permission_btn"
+        android:id="@+id/camera_permission_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Req. Both"/>
+        android:text="Req. Camera Permission"/>
+
+    <Button
+        android:id="@+id/location_contact_camera_permission_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Req. All"/>
 
 </LinearLayout>
