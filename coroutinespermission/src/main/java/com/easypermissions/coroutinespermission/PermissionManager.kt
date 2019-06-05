@@ -23,28 +23,30 @@ class PermissionManager : BasePermissionManager() {
     companion object {
 
         private const val TAG = "PermissionManager"
-        private const val DEFAULT_PERMISSION_REQ = 1
 
         suspend fun requestPermissions(
             activity: AppCompatActivity,
+            requestId: Int,
             vararg permissions: String
         ): PermissionResult {
             return withContext(Dispatchers.Main) {
-                return@withContext _requestPermissions(activity, *permissions)
+                return@withContext _requestPermissions(activity, requestId, *permissions)
             }
         }
 
         suspend fun requestPermissions(
             fragment: Fragment,
+            requestId: Int,
             vararg permissions: String
         ): PermissionResult {
             return withContext(Dispatchers.Main) {
-                return@withContext _requestPermissions(fragment, *permissions)
+                return@withContext _requestPermissions(fragment, requestId, *permissions)
             }
         }
 
         private suspend fun _requestPermissions(
             activityOrFragment: Any,
+            requestId: Int,
             vararg permissions: String
         ): PermissionResult {
             val fragmentManager = if (activityOrFragment is AppCompatActivity) {
@@ -56,7 +58,7 @@ class PermissionManager : BasePermissionManager() {
                 val permissionManager = fragmentManager.findFragmentByTag(TAG) as PermissionManager
                 permissionManager.completableDeferred = CompletableDeferred()
                 permissionManager.requestPermissions(
-                    DEFAULT_PERMISSION_REQ,
+                    requestId,
                     *permissions
                 )
                 permissionManager.completableDeferred.await()
@@ -68,7 +70,7 @@ class PermissionManager : BasePermissionManager() {
                     permissionManager,
                     TAG
                 ).commitNow()
-                permissionManager.requestPermissions(DEFAULT_PERMISSION_REQ, *permissions)
+                permissionManager.requestPermissions(requestId, *permissions)
                 permissionManager.completableDeferred.await()
             }
         }
