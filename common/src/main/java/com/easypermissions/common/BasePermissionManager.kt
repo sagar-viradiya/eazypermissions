@@ -3,6 +3,7 @@ package com.easypermissions.common
 
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import com.easypermissions.common.model.PermissionResult
@@ -49,12 +50,12 @@ abstract class BasePermissionManager : Fragment() {
 
         when {
             notGranted.isEmpty() -> onPermissionResult(PermissionResult.PermissionGranted(requestId))
-            notGranted.any { shouldShowRequestPermissionRationale(it) } -> {
+            notGranted.any { ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), it) } -> {
                 rationalRequest[requestId] = true
                 onPermissionResult(PermissionResult.ShowRational(requestId))
             }
             else -> {
-                requestPermissions(notGranted, requestId)
+                ActivityCompat.requestPermissions(requireActivity(), notGranted, requestId)
             }
         }
 
