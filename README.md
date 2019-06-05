@@ -5,7 +5,7 @@ A lightweight Android library which wraps boilerplate code of runtime permission
 
 ## Coroutines support
 Requesting permission is just a simple function call to suspending function from your coroutines or suspending function which will return [`PermissionResult`](). It takes 3 parameters.
-1. An instance of AppCompactActivity or Fragment depending from where you are requesting permission.
+1. An instance of AppCompactActivity or Fragment depending on from where you are requesting permission.
 2. Request id.
 3. varargs of permission you want to request.
 
@@ -27,26 +27,18 @@ launch {
     //Resume coroutine once result is ready
     when(permissionResult) {
         is PermissionResult.PermissionGranted -> {
-            if (it.requestId == REQUEST_ID) {
-                //Add your logic here after user grants permission(s)
-            }
+            //Add your logic here after user grants permission(s)
         }
         is PermissionResult.PermissionDenied -> {
-            if (it.requestId == REQUEST_ID) {
-                //Add your logic to handle permission denial
-            }
+            //Add your logic to handle permission denial
         }
         is PermissionResult.PermissionDeniedPermanently -> {
-            if (it.requestId == REQUEST_ID) {
-                //Add your logic here if user denied permission(s) permanently.
-                //Ideally you should ask user to manually go to settings and enable permission(s)
-            }
+            //Add your logic here if user denied permission(s) permanently.
+            //Ideally you should ask user to manually go to settings and enable permission(s)
         }
         is PermissionResult.ShowRational -> {
-            if (it.requestId == REQUEST_ID) {
-                //If user denied permission frequently then she/he is not clear about why you are asking this permission.
-                //This is your chance to explain them why you need permission.
-            }
+            //If user denied permission frequently then she/he is not clear about why you are asking this permission.
+            //This is your chance to explain them why you need permission.
         }
     }
 
