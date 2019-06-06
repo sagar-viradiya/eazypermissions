@@ -36,10 +36,12 @@ class CoroutinesFragment : Fragment() {
         location_permission_btn.setOnClickListener {
             coroutineScope.launch {
                 withContext(Dispatchers.Main) {
-                    handleResult(PermissionManager.requestPermissions(
-                        this@CoroutinesFragment, 1,
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                    ))
+                    handleResult(
+                        PermissionManager.requestPermissions(
+                            this@CoroutinesFragment, 1,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        )
+                    )
                 }
             }
         }
@@ -47,10 +49,12 @@ class CoroutinesFragment : Fragment() {
         contact_permission_btn.setOnClickListener {
             coroutineScope.launch {
                 withContext(Dispatchers.Main) {
-                    handleResult(PermissionManager.requestPermissions(
-                        this@CoroutinesFragment, 2,
-                        Manifest.permission.READ_CONTACTS
-                    ))
+                    handleResult(
+                        PermissionManager.requestPermissions(
+                            this@CoroutinesFragment, 2,
+                            Manifest.permission.READ_CONTACTS
+                        )
+                    )
                 }
             }
         }
@@ -58,10 +62,12 @@ class CoroutinesFragment : Fragment() {
         camera_permission_btn.setOnClickListener {
             coroutineScope.launch {
                 withContext(Dispatchers.Main) {
-                    handleResult(PermissionManager.requestPermissions(
-                        this@CoroutinesFragment, 3,
-                        Manifest.permission.CAMERA
-                    ))
+                    handleResult(
+                        PermissionManager.requestPermissions(
+                            this@CoroutinesFragment, 3,
+                            Manifest.permission.CAMERA
+                        )
+                    )
                 }
             }
         }
@@ -69,12 +75,14 @@ class CoroutinesFragment : Fragment() {
         location_contact_camera_permission_btn.setOnClickListener {
             coroutineScope.launch {
                 withContext(Dispatchers.Main) {
-                    handleResult(PermissionManager.requestPermissions(
-                        this@CoroutinesFragment, 4,
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.READ_CONTACTS,
-                        Manifest.permission.CAMERA
-                    ))
+                    handleResult(
+                        PermissionManager.requestPermissions(
+                            this@CoroutinesFragment, 4,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.READ_CONTACTS,
+                            Manifest.permission.CAMERA
+                        )
+                    )
                 }
             }
         }
@@ -82,7 +90,7 @@ class CoroutinesFragment : Fragment() {
     }
 
     private fun handleResult(permissionResult: PermissionResult) {
-        when(permissionResult) {
+        when (permissionResult) {
             is PermissionResult.PermissionGranted -> {
                 Toast.makeText(requireContext(), "Granted", Toast.LENGTH_SHORT).show()
             }
@@ -94,43 +102,51 @@ class CoroutinesFragment : Fragment() {
                     .setMessage("We need permission")
                     .setTitle("Rational")
                     .setPositiveButton("OK") { _, _ ->
-                        when(permissionResult.requestId) {
+                        when (permissionResult.requestId) {
                             1 -> {
                                 coroutineScope.launch(Dispatchers.Main) {
-                                    handleResult(PermissionManager.requestPermissions(
-                                        this@CoroutinesFragment,
-                                        1,
-                                        Manifest.permission.ACCESS_FINE_LOCATION
-                                    ))
+                                    handleResult(
+                                        PermissionManager.requestPermissions(
+                                            this@CoroutinesFragment,
+                                            1,
+                                            Manifest.permission.ACCESS_FINE_LOCATION
+                                        )
+                                    )
                                 }
                             }
                             2 -> {
                                 coroutineScope.launch(Dispatchers.Main) {
-                                    handleResult(PermissionManager.requestPermissions(
-                                        this@CoroutinesFragment,
-                                        2,
-                                        Manifest.permission.READ_CONTACTS
-                                    ))
+                                    handleResult(
+                                        PermissionManager.requestPermissions(
+                                            this@CoroutinesFragment,
+                                            2,
+                                            Manifest.permission.READ_CONTACTS
+                                        )
+                                    )
                                 }
                             }
                             3 -> {
                                 coroutineScope.launch(Dispatchers.Main) {
-                                    handleResult(PermissionManager.requestPermissions(
-                                        this@CoroutinesFragment,
-                                        3,
-                                        Manifest.permission.CAMERA
-                                    ))
+                                    handleResult(
+                                        PermissionManager.requestPermissions(
+                                            this@CoroutinesFragment,
+                                            3,
+                                            Manifest.permission.CAMERA
+                                        )
+                                    )
                                 }
                             }
                             4 -> {
                                 coroutineScope.launch(Dispatchers.Main) {
-                                    handleResult(PermissionManager.requestPermissions(
-                                        this@CoroutinesFragment,
-                                        4,
-                                        Manifest.permission.ACCESS_FINE_LOCATION,
-                                        Manifest.permission.READ_CONTACTS,
-                                        Manifest.permission.CAMERA
-                                    ))
+                                    handleResult(
+                                        PermissionManager.requestPermissions(
+                                            this@CoroutinesFragment,
+                                            4,
+                                            Manifest.permission.ACCESS_FINE_LOCATION,
+                                            Manifest.permission.READ_CONTACTS,
+                                            Manifest.permission.CAMERA
+                                        )
+                                    )
                                 }
                             }
                         }
@@ -148,7 +164,7 @@ class CoroutinesFragment : Fragment() {
     }
 
     override fun onDestroy() {
-       super.onDestroy()
-       parentJob.cancel()
+        super.onDestroy()
+        parentJob.cancel()
     }
 }

@@ -1,5 +1,8 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'org.jlleitschuh.gradle.ktlint'
 
 android {
     compileSdkVersion 28
@@ -37,4 +40,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
+
+ktlint {
+    debug = true
+    android = true
+    reporters = [ReporterType.CHECKSTYLE]
 }

@@ -88,7 +88,7 @@ class LivedataFragment : Fragment(), PermissionManager.PermissionObserver {
                                         this,
                                         2,
                                         Manifest.permission.READ_CONTACTS
-                                        )
+                                    )
                                 }.create().show()
                         }
                         3 -> {

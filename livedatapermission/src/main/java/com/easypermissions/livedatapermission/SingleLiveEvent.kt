@@ -16,8 +16,6 @@ package com.easypermissions.livedatapermission
  *  limitations under the License.
  */
 
-
-
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer

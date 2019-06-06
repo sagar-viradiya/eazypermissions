@@ -49,7 +49,11 @@ class PermissionManager : BasePermissionManager() {
          */
         @JvmStatic
         @MainThread
-        fun requestPermissions(activity: AppCompatActivity, requestId: Int, vararg permissions: String) {
+        fun requestPermissions(
+            activity: AppCompatActivity,
+            requestId: Int,
+            vararg permissions: String
+        ) {
             _requestPermissions(
                 activity,
                 requestId,
@@ -69,7 +73,11 @@ class PermissionManager : BasePermissionManager() {
          */
         @JvmStatic
         @MainThread
-        fun requestPermissions(fragment: Fragment, requestId: Int, vararg permissions: String) {
+        fun requestPermissions(
+            fragment: Fragment,
+            requestId: Int,
+            vararg permissions: String
+        ) {
             _requestPermissions(
                 fragment,
                 requestId,
@@ -94,7 +102,9 @@ class PermissionManager : BasePermissionManager() {
                 )
             } else {
                 if (activityOrFragment !is PermissionObserver) {
-                    throw IllegalArgumentException("Activity/Fragment must implement PermissionObserver")
+                    throw IllegalArgumentException(
+                        "Activity/Fragment must implement PermissionObserver"
+                    )
                 } else {
                     val permissionManager = PermissionManager()
                     fragmentManager.beginTransaction().add(
