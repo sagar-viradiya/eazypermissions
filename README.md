@@ -1,5 +1,5 @@
 # Easy Runtime Permission
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/sagar-viradiya/livedata-permission/blob/master/LICENSE) [![Build Status](https://travis-ci.com/sagar-viradiya/livedata-permission.svg?token=VppdY5VoQBEp72REmqxi&branch=master)](https://travis-ci.com/sagar-viradiya/livedata-permission)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/sagar-viradiya/livedata-permission/blob/master/LICENSE) [![Build Status](https://travis-ci.com/sagar-viradiya/livedata-permission.svg?token=VppdY5VoQBEp72REmqxi&branch=master)](https://travis-ci.com/sagar-viradiya/livedata-permission) [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 
 A lightweight Android library which wraps boilerplate code of runtime permission and allows you to request permissions from coroutines (No callbacks yay :tada:) or request and observe permissions through LiveData.
 
