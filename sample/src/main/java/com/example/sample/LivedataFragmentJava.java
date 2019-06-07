@@ -1,0 +1,113 @@
+package com.example.sample;
+
+
+import android.Manifest;
+import android.app.AlertDialog;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.easypermissions.common.model.PermissionResult;
+import com.easypermissions.livedatapermission.PermissionManager;
+import org.jetbrains.annotations.NotNull;
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class LivedataFragmentJava extends Fragment implements PermissionManager.PermissionObserver {
+
+
+    public LivedataFragmentJava() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_ui, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        view.findViewById(R.id.location_permission_btn).setOnClickListener(view1 ->
+                PermissionManager.requestPermissions(this, 1, Manifest.permission.ACCESS_FINE_LOCATION)
+        );
+        view.findViewById(R.id.contact_permission_btn).setOnClickListener(view1 ->
+                PermissionManager.requestPermissions(this, 2, Manifest.permission.READ_CONTACTS)
+        );
+        view.findViewById(R.id.camera_permission_btn).setOnClickListener(view1 ->
+                PermissionManager.requestPermissions(this, 3, Manifest.permission.CAMERA)
+        );
+        view.findViewById(R.id.location_contact_camera_permission_btn).setOnClickListener(view1 ->
+                PermissionManager.requestPermissions(
+                        this,
+                        4,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.READ_CONTACTS,
+                        Manifest.permission.CAMERA)
+        );
+    }
+
+    @Override
+    public void setupObserver(@NotNull LiveData<PermissionResult> permissionResultLiveData) {
+        permissionResultLiveData.observe(this, permissionResult -> {
+            if (permissionResult instanceof PermissionResult.PermissionGranted) {
+                Toast.makeText(requireContext(), "Granted", Toast.LENGTH_SHORT).show();
+            } else if (permissionResult instanceof PermissionResult.PermissionDenied) {
+                Toast.makeText(requireContext(), "Denied", Toast.LENGTH_SHORT).show();
+            } else if (permissionResult instanceof PermissionResult.PermissionDeniedPermanently) {
+                Toast.makeText(requireContext(), "Denied permanently", Toast.LENGTH_SHORT).show();
+            } else if (permissionResult instanceof PermissionResult.ShowRational) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(requireContext())
+                        .setMessage("We need permission")
+                        .setTitle("Rational")
+                        .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
+                switch (((PermissionResult.ShowRational) permissionResult).getRequestId()) {
+                    case 1:
+                        alertDialogBuilder.setPositiveButton("OK", (dialogInterface, i) ->
+                                PermissionManager.requestPermissions(
+                                        this,
+                                        1,
+                                        Manifest.permission.ACCESS_FINE_LOCATION)
+                        ).create().show();
+                        break;
+                    case 2:
+                        alertDialogBuilder.setPositiveButton("OK", (dialogInterface, i) ->
+                                PermissionManager.requestPermissions(
+                                        this,
+                                        2,
+                                        Manifest.permission.READ_CONTACTS)
+                        ).create().show();
+                        break;
+                    case 3:
+                        alertDialogBuilder.setPositiveButton("OK", (dialogInterface, i) ->
+                                PermissionManager.requestPermissions(
+                                        this,
+                                        3,
+                                        Manifest.permission.CAMERA)
+                        ).create().show();
+                        break;
+                    case 4:
+                        alertDialogBuilder.setPositiveButton("OK", (dialogInterface, i) ->
+                                PermissionManager.requestPermissions(
+                                        this,
+                                        4,
+                                        Manifest.permission.ACCESS_FINE_LOCATION,
+                                        Manifest.permission.READ_CONTACTS,
+                                        Manifest.permission.CAMERA)
+                        ).create().show();
+                        break;
+                }
+            }
+        });
+    }
+}

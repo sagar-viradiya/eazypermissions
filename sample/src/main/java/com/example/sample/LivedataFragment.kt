@@ -32,20 +32,20 @@ class LivedataFragment : Fragment(), PermissionManager.PermissionObserver {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         location_permission_btn.setOnClickListener {
-            PermissionManager.requestPermissions(this@LivedataFragment, 1, Manifest.permission.ACCESS_FINE_LOCATION)
+            PermissionManager.requestPermissions(this, 1, Manifest.permission.ACCESS_FINE_LOCATION)
         }
 
         contact_permission_btn.setOnClickListener {
-            PermissionManager.requestPermissions(this@LivedataFragment, 2, Manifest.permission.READ_CONTACTS)
+            PermissionManager.requestPermissions(this, 2, Manifest.permission.READ_CONTACTS)
         }
 
         camera_permission_btn.setOnClickListener {
-            PermissionManager.requestPermissions(this@LivedataFragment, 3, Manifest.permission.CAMERA)
+            PermissionManager.requestPermissions(this, 3, Manifest.permission.CAMERA)
         }
 
         location_contact_camera_permission_btn.setOnClickListener {
             PermissionManager.requestPermissions(
-                this@LivedataFragment,
+                this,
                 4,
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.READ_CONTACTS,
@@ -88,7 +88,7 @@ class LivedataFragment : Fragment(), PermissionManager.PermissionObserver {
                                         this,
                                         2,
                                         Manifest.permission.READ_CONTACTS
-                                        )
+                                    )
                                 }.create().show()
                         }
                         3 -> {

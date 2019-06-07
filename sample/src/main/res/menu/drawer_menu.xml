@@ -8,5 +8,8 @@
         <item
             android:id="@+id/livedataFragment"
             android:title="Permission using livedata" />
+        <item
+            android:id="@+id/livedataFragmentJava"
+            android:title="Permission using livedata(Java)"/>
     </group>
 </menu>
