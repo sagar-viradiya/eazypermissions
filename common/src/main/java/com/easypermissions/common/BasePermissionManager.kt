@@ -50,12 +50,12 @@ abstract class BasePermissionManager : Fragment() {
 
         when {
             notGranted.isEmpty() -> onPermissionResult(PermissionResult.PermissionGranted(requestId))
-            notGranted.any { ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), it) } -> {
+            notGranted.any { shouldShowRequestPermissionRationale(it) } -> {
                 rationalRequest[requestId] = true
                 onPermissionResult(PermissionResult.ShowRational(requestId))
             }
             else -> {
-                ActivityCompat.requestPermissions(requireActivity(), notGranted, requestId)
+                requestPermissions(notGranted, requestId)
             }
         }
 
