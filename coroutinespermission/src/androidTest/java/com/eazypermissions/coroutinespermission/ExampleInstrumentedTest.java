@@ -1,4 +1,4 @@
-package com.example.livedatapermission;
+package com.eazypermissions.coroutinespermission;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -16,12 +16,11 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
-
     @Test
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.livedatapermission.test", appContext.getPackageName());
+        assertEquals("com.eazypermissions.coroutinespermission.test", appContext.getPackageName());
     }
 }
