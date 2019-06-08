@@ -1,5 +1,5 @@
-# Easy Runtime Permission
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/sagar-viradiya/livedata-permission/blob/master/LICENSE) [![Build Status](https://travis-ci.com/sagar-viradiya/livedata-permission.svg?token=VppdY5VoQBEp72REmqxi&branch=master)](https://travis-ci.com/sagar-viradiya/livedata-permission) [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
+# Eazy Runtime Permission
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/sagar-viradiya/eazypermissions/blob/master/LICENSE) [![Build Status]() [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 
 A lightweight Android library which wraps boilerplate code of runtime permission and allows you to request permissions from coroutines (No callbacks yay :tada:) or request and observe permissions through LiveData.
 
@@ -75,7 +75,7 @@ PermissionManager.requestPermissions(
 ```
 
 ### Observing permission request result
-Your Activity/Fragment must implement [`PermissionObserver`](livedatapermission/src/main/java/com/example/livedatapermission/PermissionManager.kt) which expose LiveData<[`PermissionResult`]()>. Here is the definition of [`PermissionObserver`](livedatapermission/src/main/java/com/example/livedatapermission/PermissionManager.kt)
+Your Activity/Fragment must implement [`PermissionObserver`]() which expose LiveData<[`PermissionResult`]()>. Here is the definition of [`PermissionObserver`]()
 ```kotlin
 /**
  * Interface definition for a callback to get [LiveData] of [PermissionResult]
@@ -117,8 +117,8 @@ override fun setupObserver(permissionResultLiveData: LiveData<PermissionResult>)
     })
 }
 ```
-> It is mandatory to implement [`PermissionObserver`](livedatapermission/src/main/java/com/example/livedatapermission/PermissionManager.kt) from where you are requesting permission(either Activity or Fragment).
-If you don't then library will throw `IllegalArgumentException` stating that you have to implement [`PermissionObserver`](livedatapermission/src/main/java/com/example/livedatapermission/PermissionManager.kt)
+> It is mandatory to implement [`PermissionObserver`]() from where you are requesting permission(either Activity or Fragment).
+If you don't then library will throw `IllegalArgumentException` stating that you have to implement [`PermissionObserver`]()
 
 Library will take care of Activity/Fragment recreation so even if user rotates screen or due to some other reason if your Activity/Fragment gets recreated it will call `setupObserver` method to register new observer of LiveData.
 
