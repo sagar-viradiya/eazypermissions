@@ -36,6 +36,7 @@ Enhancement suggestions are tracked as [GitHub issues](https://guides.github.com
 ### Pull Requests
 Below are the few points that you should care to have your contribution considered by the maintainers:
 
-1. Commit message should have proper title and discription of all changes.
-2. Follow the official kotlin code [styleguides](https://kotlinlang.org/docs/reference/coding-conventions.html)
-3. After you submit your pull request, verify that all [status checks](https://help.github.com/articles/about-status-checks/) are passing <details><summary>What if the status checks are failing?</summary>If a status check is failing, and you believe that the failure is unrelated to your change, please leave a comment on the pull request explaining why you believe the failure is unrelated. A maintainer will re-run the status check for you.
+1. Please make sure to open PR against `master` branch. 
+2. Commit message should have proper title and discription of all changes.
+3. Follow the official kotlin code [styleguides](https://kotlinlang.org/docs/reference/coding-conventions.html)
+4. After you submit your pull request, verify that all [status checks](https://help.github.com/articles/about-status-checks/) are passing <details><summary>What if the status checks are failing?</summary>If a status check is failing, and you believe that the failure is unrelated to your change, please leave a comment on the pull request explaining why you believe the failure is unrelated. A maintainer will re-run the status check for you.
