@@ -1,4 +1,4 @@
-package com.easypermissions.common
+package com.eazypermissions.common
 
 
 import android.content.pm.PackageManager
@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import com.easypermissions.common.model.PermissionResult
+import com.eazypermissions.common.model.PermissionResult
 
 /**
  * A simple [Fragment] subclass.
@@ -30,9 +30,10 @@ abstract class BasePermissionManager : Fragment() {
                     permissions.filterIndexed { index, _ -> grantResults[index] == PackageManager.PERMISSION_DENIED })
             )
         } else {
-            onPermissionResult(PermissionResult.PermissionDeniedPermanently(requestCode,
-                permissions.filterIndexed { index, _ -> grantResults[index] == PackageManager.PERMISSION_DENIED }
-            ))
+            onPermissionResult(
+                PermissionResult.PermissionDeniedPermanently(requestCode,
+                    permissions.filterIndexed { index, _ -> grantResults[index] == PackageManager.PERMISSION_DENIED }
+                ))
         }
     }
 
