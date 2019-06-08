@@ -1,4 +1,4 @@
-# Contributing to Easy Permissions
+# Contributing to Eazy Permissions
 
 First thing first, Thank you for taking time and deciding to contribute :tada:
 
