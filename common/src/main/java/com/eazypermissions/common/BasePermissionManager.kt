@@ -1,11 +1,10 @@
-package com.easypermissions.common
+package com.eazypermissions.common
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import com.easypermissions.common.model.PermissionResult
+import com.eazypermissions.common.model.PermissionResult
 
 /**
  * A simple [Fragment] subclass.
@@ -43,8 +42,7 @@ abstract class BasePermissionManager : Fragment() {
                     permissions.filterIndexed { index, _ ->
                         grantResults[index] == PackageManager.PERMISSION_DENIED
                     }
-                )
-            )
+                ))
         }
     }
 
@@ -66,17 +64,12 @@ abstract class BasePermissionManager : Fragment() {
         when {
             notGranted.isEmpty() ->
                 onPermissionResult(PermissionResult.PermissionGranted(requestId))
-            notGranted.any {
-                ActivityCompat.shouldShowRequestPermissionRationale(
-                    requireActivity(),
-                    it
-                )
-            } -> {
+            notGranted.any { shouldShowRequestPermissionRationale(it) } -> {
                 rationalRequest[requestId] = true
                 onPermissionResult(PermissionResult.ShowRational(requestId))
             }
             else -> {
-                ActivityCompat.requestPermissions(requireActivity(), notGranted, requestId)
+                requestPermissions(notGranted, requestId)
             }
         }
     }

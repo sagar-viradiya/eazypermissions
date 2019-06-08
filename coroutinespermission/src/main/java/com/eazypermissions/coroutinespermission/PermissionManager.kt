@@ -1,9 +1,9 @@
-package com.easypermissions.coroutinespermission
+package com.eazypermissions.coroutinespermission
 
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import com.easypermissions.common.BasePermissionManager
-import com.easypermissions.common.model.PermissionResult
+import com.eazypermissions.common.BasePermissionManager
+import com.eazypermissions.common.model.PermissionResult
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -30,7 +30,11 @@ class PermissionManager : BasePermissionManager() {
             vararg permissions: String
         ): PermissionResult {
             return withContext(Dispatchers.Main) {
-                return@withContext _requestPermissions(activity, requestId, *permissions)
+                return@withContext _requestPermissions(
+                    activity,
+                    requestId,
+                    *permissions
+                )
             }
         }
 
@@ -40,7 +44,11 @@ class PermissionManager : BasePermissionManager() {
             vararg permissions: String
         ): PermissionResult {
             return withContext(Dispatchers.Main) {
-                return@withContext _requestPermissions(fragment, requestId, *permissions)
+                return@withContext _requestPermissions(
+                    fragment,
+                    requestId,
+                    *permissions
+                )
             }
         }
 

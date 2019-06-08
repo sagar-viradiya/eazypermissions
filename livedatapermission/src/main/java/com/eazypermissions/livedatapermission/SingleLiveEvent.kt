@@ -1,4 +1,4 @@
-package com.easypermissions.livedatapermission
+package com.eazypermissions.livedatapermission
 
 /*
  *  Copyright 2017 Google Inc.

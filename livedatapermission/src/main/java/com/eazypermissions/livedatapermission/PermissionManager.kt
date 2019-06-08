@@ -1,12 +1,12 @@
-package com.easypermissions.livedatapermission
+package com.eazypermissions.livedatapermission
 
 import android.arch.lifecycle.LiveData
 import android.content.Context
 import android.support.annotation.MainThread
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import com.easypermissions.common.BasePermissionManager
-import com.easypermissions.common.model.PermissionResult
+import com.eazypermissions.common.BasePermissionManager
+import com.eazypermissions.common.model.PermissionResult
 
 /**
  * Permission manager which handles checking permission is granted or not and if not then will request permission.
