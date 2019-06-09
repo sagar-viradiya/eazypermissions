@@ -6,10 +6,10 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 20
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.coroutinespermission_version_code
+        versionName rootProject.ext.coroutinespermission_version_name
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -38,3 +38,36 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+
+// Bintray info
+final def LIB_MODULE_NAME = 'coroutinespermission'
+final def LIB_MODULE_DESC = 'Android library to request permissions in coroutines without callbacks.'
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = LIB_MODULE_NAME
+
+    publishedGroupId = GROUP
+    libraryName = LIB_MODULE_NAME
+    artifact = LIB_MODULE_NAME // Has to be same as your library module nameOfLib
+
+    libraryDescription = LIB_MODULE_DESC
+
+    // Your github repo link
+    siteUrl = rootProject.ext.libPomUrl
+    gitUrl = rootProject.ext.libPomGitUrl
+    githubRepository = rootProject.ext.libGithubRepo
+
+    libraryVersion = rootProject.ext.coroutinespermission_version_name
+
+    developerId = POM_DEVELOPER_ID
+    developerName = POM_DEVELOPER_NAME
+    developerEmail = POM_DEVELOPER_EMAILID
+
+    licenseName = POM_LICENCE_NAME
+    licenseUrl = POM_LICENCE_URL
+    allLicenses = [POM_ALL_LICENCES]
+}
+
+apply from: '../scripts/installv1.gradle'
+apply from: '../scripts/bintrayv1.gradle'

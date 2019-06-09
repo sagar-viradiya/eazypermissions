@@ -29,3 +29,11 @@ before_script:
   - ./gradlew clean
 script:
   - ./gradlew build check
+deploy:
+  provider: script
+  script:
+    ./gradlew clean build install bintrayUpload -PbintrayUser=$BINTRAY_USER -PbintrayApiKey=$BINTRAY_KEY
+  skip_cleanup: true # to upload artifacts created during the build
+  on:
+    branch: feature/sagar/continuous-deployment
+  dry_run: true
