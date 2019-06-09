@@ -27,6 +27,15 @@ android {
         targetCompatibility = '1.8'
     }
 
+    // Ignore Java 8 Doclint errors
+    if (JavaVersion.current().isJava8Compatible()) {
+        allprojects {
+            tasks.withType(Javadoc) {
+                options.addStringOption('Xdoclint:none', '-quiet')
+            }
+        }
+    }
+
 }
 
 dependencies {
