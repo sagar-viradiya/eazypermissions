@@ -1,4 +1,4 @@
-package com.easypermissions.coroutinespermission;
+package com.eazypermissions.coroutinespermission;
 
 import org.junit.Test;
 
