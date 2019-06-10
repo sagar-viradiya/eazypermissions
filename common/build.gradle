@@ -44,7 +44,7 @@ final def LIB_MODULE_NAME = 'common'
 final def LIB_MODULE_DESC = 'Common module for eazy permissions.'
 
 ext {
-    bintrayRepo = 'Eazy-Permissions'
+    bintrayRepo = 'eazypermissions'
     bintrayName = LIB_MODULE_NAME
 
     publishedGroupId = GROUP

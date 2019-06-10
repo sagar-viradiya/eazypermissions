@@ -44,7 +44,7 @@ final def LIB_MODULE_NAME = 'coroutinespermission'
 final def LIB_MODULE_DESC = 'Android library to request permissions in coroutines without callbacks.'
 
 ext {
-    bintrayRepo = 'Eazy-Permissions'
+    bintrayRepo = 'eazypermissions'
     bintrayName = LIB_MODULE_NAME
 
     publishedGroupId = GROUP
