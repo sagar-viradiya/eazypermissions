@@ -46,7 +46,7 @@ final def LIB_MODULE_NAME = 'livedatapermission'
 final def LIB_MODULE_DESC = 'Android library to request permissions and observe the result as livedata'
 
 ext {
-    bintrayRepo = 'maven'
+    bintrayRepo = 'Eazy-Permissions'
     bintrayName = LIB_MODULE_NAME
 
     publishedGroupId = GROUP
