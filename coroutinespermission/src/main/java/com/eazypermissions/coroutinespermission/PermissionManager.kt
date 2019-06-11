@@ -82,7 +82,6 @@ class PermissionManager : BasePermissionManager() {
                 permissionManager.completableDeferred.await()
             }
         }
-
     }
 
     override fun onDestroy() {

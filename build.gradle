@@ -7,6 +7,7 @@ buildscript {
         gradle_version = '3.4.1'
         bintray_version = '1.8.0'
         maven_version = '2.1'
+        ktlint_plugin_version = '8.0.0'
 
         libPomUrl = 'https://github.com/sagar-viradiya/eazypermissions'
         libPomGitUrl = 'https://github.com/sagar-viradiya/eazypermissions.git'
@@ -29,11 +30,17 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
 
     dependencies {
         classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // Ktlint plugin
+        classpath "org.jlleitschuh.gradle:ktlint-gradle:$ktlint_plugin_version"
 
         // Required plugins added to classpath to facilitate pushing to JCenter/Bintray
         classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:$bintray_version"

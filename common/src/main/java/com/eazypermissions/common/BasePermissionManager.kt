@@ -1,9 +1,7 @@
 package com.eazypermissions.common
 
-
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import com.eazypermissions.common.model.PermissionResult
@@ -21,18 +19,29 @@ abstract class BasePermissionManager : Fragment() {
         retainInstance = true
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (grantResults.isNotEmpty() &&
+            grantResults.all { it == PackageManager.PERMISSION_GRANTED }
+        ) {
             onPermissionResult(PermissionResult.PermissionGranted(requestCode))
         } else if (permissions.any { shouldShowRequestPermissionRationale(it) }) {
             onPermissionResult(
                 PermissionResult.PermissionDenied(requestCode,
-                    permissions.filterIndexed { index, _ -> grantResults[index] == PackageManager.PERMISSION_DENIED })
+                    permissions.filterIndexed { index, _ ->
+                        grantResults[index] == PackageManager.PERMISSION_DENIED
+                    }
+                )
             )
         } else {
             onPermissionResult(
                 PermissionResult.PermissionDeniedPermanently(requestCode,
-                    permissions.filterIndexed { index, _ -> grantResults[index] == PackageManager.PERMISSION_DENIED }
+                    permissions.filterIndexed { index, _ ->
+                        grantResults[index] == PackageManager.PERMISSION_DENIED
+                    }
                 ))
         }
     }
@@ -46,11 +55,15 @@ abstract class BasePermissionManager : Fragment() {
         }
 
         val notGranted = permissions.filter {
-            ContextCompat.checkSelfPermission(requireActivity(), it) != PackageManager.PERMISSION_GRANTED
+            ContextCompat.checkSelfPermission(
+                requireActivity(),
+                it
+            ) != PackageManager.PERMISSION_GRANTED
         }.toTypedArray()
 
         when {
-            notGranted.isEmpty() -> onPermissionResult(PermissionResult.PermissionGranted(requestId))
+            notGranted.isEmpty() ->
+                onPermissionResult(PermissionResult.PermissionGranted(requestId))
             notGranted.any { shouldShowRequestPermissionRationale(it) } -> {
                 rationalRequest[requestId] = true
                 onPermissionResult(PermissionResult.ShowRational(requestId))
@@ -59,9 +72,7 @@ abstract class BasePermissionManager : Fragment() {
                 requestPermissions(notGranted, requestId)
             }
         }
-
     }
 
     protected abstract fun onPermissionResult(permissionResult: PermissionResult)
-
 }
