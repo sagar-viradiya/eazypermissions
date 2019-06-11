@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/coroutinesFragment">
+
+    <fragment
+        android:id="@+id/coroutinesFragment"
+        android:name="com.example.sample.CoroutinesFragment"
+        android:label="Coroutines Permissions"
+        tools:layout="@layout/fragment_ui" />
+    <fragment
+        android:id="@+id/livedataFragment"
+        android:name="com.example.sample.LivedataFragment"
+        android:label="Livedata Permissions"
+        tools:layout="@layout/fragment_ui" />
+    <fragment
+        android:id="@+id/livedataFragmentJava"
+        android:name="com.example.sample.LivedataFragmentJava"
+        android:label="Livedata Permissions Java"
+        tools:layout="@layout/fragment_ui" />
+
+</navigation>
