@@ -28,4 +28,5 @@ before_install:
 before_script:
   - ./gradlew clean
 script:
+  - ./gradlew ktlintCheck
   - ./gradlew build check
