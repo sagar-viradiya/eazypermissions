@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/coroutinesFragment"
+            android:title="Permission using coroutines"
+            android:checked="true" />
+        <item
+            android:id="@+id/livedataFragment"
+            android:title="Permission using livedata" />
+        <item
+            android:id="@+id/livedataFragmentJava"
+            android:title="Permission using livedata(Java)"/>
+    </group>
+</menu>

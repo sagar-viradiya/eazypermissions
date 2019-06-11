@@ -1,4 +1,4 @@
-package com.example.livedatapermission;
+package com.eazypermissions.livedatapermission;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
