@@ -4,7 +4,7 @@
 A lightweight Android library which wraps boilerplate code of runtime permission and allows you to request permissions from coroutines (No callbacks yay :tada:) or request and observe permissions through LiveData.
 
 ## Coroutines support
-Requesting permission is just a simple function call to suspending function from your coroutines or suspending function which will return [`PermissionResult`](). It takes 3 parameters.
+Requesting permission is just a simple function call to suspending function from your coroutines or suspending function which will return [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt). It takes 3 parameters.
 1. An instance of AppCompactActivity or Fragment depending on from where you are requesting permission.
 2. Request id.
 3. varargs of permission you want to request.
@@ -46,7 +46,7 @@ launch {
 ```
 You can request permission from coroutine launched using any dispatcher(IO/Default/Main).
 
-Library exposes [`PermissionResult`]() as result of permission request which is nothing but simple sealed class.
+Library exposes [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt) as result of permission request which is nothing but simple sealed class.
 ```kotlin
 sealed class PermissionResult {
     class PermissionGranted(val requestId: Int) : PermissionResult()
@@ -75,7 +75,7 @@ PermissionManager.requestPermissions(
 ```
 
 ### Observing permission request result
-Your Activity/Fragment must implement [`PermissionObserver`]() which expose LiveData<[`PermissionResult`]()>. Here is the definition of [`PermissionObserver`]()
+Your Activity/Fragment must implement [`PermissionObserver`](https://github.com/sagar-viradiya/eazypermissions/blob/e1a36d5fb3ad487ac22da9b18e9b4c848cfcb74c/livedatapermission/src/main/java/com/eazypermissions/livedatapermission/PermissionManager.kt#L115) which expose LiveData<[`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt)>. Here is the definition of [`PermissionObserver`](https://github.com/sagar-viradiya/eazypermissions/blob/e1a36d5fb3ad487ac22da9b18e9b4c848cfcb74c/livedatapermission/src/main/java/com/eazypermissions/livedatapermission/PermissionManager.kt#L115)
 ```kotlin
 /**
  * Interface definition for a callback to get [LiveData] of [PermissionResult]
@@ -86,7 +86,7 @@ interface PermissionObserver {
     fun setupObserver(permissionResultLiveData: LiveData<PermissionResult>)
 }
 ```
-Just as you would observe other LiveData you can observe LiveData<[`PermissionResult`]()> as follow
+Just as you would observe other LiveData you can observe LiveData<[`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt)> as follow
 ```kotlin
 override fun setupObserver(permissionResultLiveData: LiveData<PermissionResult>) {
     permissionResultLiveData.observe(this, Observer<PermissionResult> {
@@ -117,8 +117,8 @@ override fun setupObserver(permissionResultLiveData: LiveData<PermissionResult>)
     })
 }
 ```
-> It is mandatory to implement [`PermissionObserver`]() from where you are requesting permission(either Activity or Fragment).
-If you don't then library will throw `IllegalArgumentException` stating that you have to implement [`PermissionObserver`]()
+> It is mandatory to implement [`PermissionObserver`](https://github.com/sagar-viradiya/eazypermissions/blob/e1a36d5fb3ad487ac22da9b18e9b4c848cfcb74c/livedatapermission/src/main/java/com/eazypermissions/livedatapermission/PermissionManager.kt#L115) from where you are requesting permission(either Activity or Fragment).
+If you don't then library will throw `IllegalArgumentException` stating that you have to implement [`PermissionObserver`](https://github.com/sagar-viradiya/eazypermissions/blob/e1a36d5fb3ad487ac22da9b18e9b4c848cfcb74c/livedatapermission/src/main/java/com/eazypermissions/livedatapermission/PermissionManager.kt#L115)
 
 Library will take care of Activity/Fragment recreation so even if user rotates screen or due to some other reason if your Activity/Fragment gets recreated it will call `setupObserver` method to register new observer of LiveData.
 
