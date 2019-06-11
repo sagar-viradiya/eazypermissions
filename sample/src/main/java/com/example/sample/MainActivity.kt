@@ -8,8 +8,8 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.widget.Toast
-import com.example.livedatapermission.PermissionManager
-import com.example.livedatapermission.model.PermissionResult
+import com.eazypermissions.livedatapermission.PermissionManager
+import com.eazypermissions.common.model.PermissionResult
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), PermissionManager.PermissionObserver {
