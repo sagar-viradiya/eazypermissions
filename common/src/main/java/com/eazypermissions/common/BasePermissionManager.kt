@@ -7,7 +7,7 @@ import android.support.v4.content.ContextCompat
 import com.eazypermissions.common.model.PermissionResult
 
 /**
- * A simple [Fragment] subclass.
+ * A simple abstract [Fragment] subclass.
  *
  */
 abstract class BasePermissionManager : Fragment() {

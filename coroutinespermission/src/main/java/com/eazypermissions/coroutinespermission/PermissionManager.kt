@@ -9,8 +9,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /**
+ * Permission manager which handles checking permission is granted or not and if not then will request permission.
+ * This is nothing but a headless fragment which wraps the boilerplate code for checking and requesting permission
+ * and suspends the coroutines until result is available.
  * A simple [Fragment] subclass.
- *
  */
 class PermissionManager : BasePermissionManager() {
 
@@ -24,6 +26,17 @@ class PermissionManager : BasePermissionManager() {
 
         private const val TAG = "PermissionManager"
 
+        /**
+         * A static factory method to request permission from activity.
+         *
+         * @param activity an instance of [AppCompatActivity]
+         * @param requestId Request ID for permission request
+         * @param permissions Permission(s) to request
+         *
+         * @return [PermissionResult]
+         *
+         * Suspends the coroutines until result is available.
+         */
         suspend fun requestPermissions(
             activity: AppCompatActivity,
             requestId: Int,
@@ -38,6 +51,17 @@ class PermissionManager : BasePermissionManager() {
             }
         }
 
+        /**
+         * A static factory method to request permission from fragment.
+         *
+         * @param fragment an instance of [Fragment]
+         * @param requestId Request ID for permission request
+         * @param permissions Permission(s) to request
+         *
+         * @return [PermissionResult]
+         *
+         * Suspends the coroutines until result is available.
+         */
         suspend fun requestPermissions(
             fragment: Fragment,
             requestId: Int,
