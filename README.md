@@ -60,7 +60,7 @@ sealed class PermissionResult {
 Notice `PermissionDenied` and `PermissionDeniedPermanently` are also exposing list of denied permissions and permanently denied permissions respectively so that you can decide your flow based on denied permissions if you want to.
 
 ## LiveData support
-Just in case of coroutine we saw above requesting permission is just a simple method call to `[PermissionManager]`(livedatapermission/src/main/java/com/eazypermissions/livedatapermission/PermissionManager.kt) from your Activity/Fragment. It takes 3 parameters.
+Just in case of coroutine we saw above requesting permission is just a simple method call to [`PermissionManager`](livedatapermission/src/main/java/com/eazypermissions/livedatapermission/PermissionManager.kt) from your Activity/Fragment. It takes 3 parameters.
 1. An instance of AppCompactActivity or Fragment depending from where you are requesting permission.
 2. Request id.
 3. varargs of permission you want to request.
