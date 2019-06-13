@@ -4,10 +4,12 @@
 A lightweight Android library which wraps boilerplate code of runtime permission and allows you to request permissions from coroutines (No callbacks yay :tada:) or request and observe permissions through LiveData.
 
 ## Coroutines support
-Requesting permission is just a simple function call to suspending function from your coroutines or suspending function which will return [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt). It takes 3 parameters.
+Requesting permission is just a simple function call to suspending function `requestPermissions` of [`PermissionManager`](coroutinespermission/src/main/java/com/eazypermissions/coroutinespermission/PermissionManager.kt) from your coroutines or other suspending function which will return [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt). It takes 3 parameters.
 1. An instance of AppCompactActivity or Fragment depending on from where you are requesting permission.
 2. Request id.
 3. varargs of permission you want to request.
+
+This is how you would request for permission within coroutines and get result sequentially.
 
 ```kotlin
 .
@@ -46,7 +48,7 @@ launch {
 ```
 You can request permission from coroutine launched using any dispatcher(IO/Default/Main).
 
-Library exposes [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt) as result of permission request which is nothing but simple sealed class.
+Library exposes [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt) as result of permission request which is nothing but simple sealed class which wraps all possible outcomes.
 ```kotlin
 sealed class PermissionResult {
     class PermissionGranted(val requestId: Int) : PermissionResult()
@@ -58,8 +60,7 @@ sealed class PermissionResult {
 Notice `PermissionDenied` and `PermissionDeniedPermanently` are also exposing list of denied permissions and permanently denied permissions respectively so that you can decide your flow based on denied permissions if you want to.
 
 ## LiveData support
-With just one simple step(implementing an interface) you are ready to request permission and observe the result of request.
-Just in case of coroutine we saw above requesting permission is just a simple method call from your Activity/Fragment. It takes 3 parameters.
+Just in case of coroutine we saw above requesting permission is just a simple method call to `[PermissionManager]`(livedatapermission/src/main/java/com/eazypermissions/livedatapermission/PermissionManager.kt) from your Activity/Fragment. It takes 3 parameters.
 1. An instance of AppCompactActivity or Fragment depending from where you are requesting permission.
 2. Request id.
 3. varargs of permission you want to request.
@@ -75,7 +76,8 @@ PermissionManager.requestPermissions(
 ```
 
 ### Observing permission request result
-Your Activity/Fragment must implement [`PermissionObserver`](https://github.com/sagar-viradiya/eazypermissions/blob/e1a36d5fb3ad487ac22da9b18e9b4c848cfcb74c/livedatapermission/src/main/java/com/eazypermissions/livedatapermission/PermissionManager.kt#L115) which expose LiveData<[`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt)>. Here is the definition of [`PermissionObserver`](https://github.com/sagar-viradiya/eazypermissions/blob/e1a36d5fb3ad487ac22da9b18e9b4c848cfcb74c/livedatapermission/src/main/java/com/eazypermissions/livedatapermission/PermissionManager.kt#L115)
+With just one simple step(implementing an interface) you are ready to observe the result of request.
+Your Activity/Fragment must implement `setupObserver` method of [`PermissionObserver`](https://github.com/sagar-viradiya/eazypermissions/blob/e1a36d5fb3ad487ac22da9b18e9b4c848cfcb74c/livedatapermission/src/main/java/com/eazypermissions/livedatapermission/PermissionManager.kt#L115) interface which expose LiveData<[`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt)>. Here is the definition of [`PermissionObserver`](https://github.com/sagar-viradiya/eazypermissions/blob/e1a36d5fb3ad487ac22da9b18e9b4c848cfcb74c/livedatapermission/src/main/java/com/eazypermissions/livedatapermission/PermissionManager.kt#L115)
 ```kotlin
 /**
  * Interface definition for a callback to get [LiveData] of [PermissionResult]
@@ -86,6 +88,8 @@ interface PermissionObserver {
     fun setupObserver(permissionResultLiveData: LiveData<PermissionResult>)
 }
 ```
+The library will only call `setupObserver` method when you are requesting permission for the first time. All the successive call to `requestPermissions` method will use the same observer.
+
 Just as you would observe other LiveData you can observe LiveData<[`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt)> as follow
 ```kotlin
 override fun setupObserver(permissionResultLiveData: LiveData<PermissionResult>) {
