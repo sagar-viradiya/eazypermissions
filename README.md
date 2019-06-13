@@ -144,7 +144,8 @@ Have suggestions for improvements and want to contribute? or Found any issues?
 Head over to [Contribution guidelines](CONTRIBUTING.md) to know more about contributing to this library.
 
 ## Screenshots of sample
-To do - Add screenshots once done with sample app
+![sc1](screenshots/SS1.png) ![sc2](screenshots/SS2.png)   
+![sc1](screenshots/SS3.png) ![sc2](screenshots/SS4.png)
 
 # License
 
