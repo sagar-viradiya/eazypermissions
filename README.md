@@ -3,6 +3,19 @@
 
 A lightweight Android library which wraps boilerplate code of runtime permission and allows you to request permissions from coroutines (No callbacks yay :tada:) or request and observe permissions through LiveData.
 
+## Including in your project
+Eazy permissions is available in the Jcenter and divided into two modules so that based on your need you can include either coroutines or livedata in your project
+
+```groovy
+//For coroutines
+implementation "com.sagar:coroutinespermission:[latest_version]"
+
+//For LiveData
+implementation "com.sagar:livedatapermission:[latest_version]"
+```
+- `latest_version` for coroutines -
+- `latest_version` for livedata - 
+
 ## Coroutines support
 Requesting permission is just a simple function call to suspending function `requestPermissions` of [`PermissionManager`](coroutinespermission/src/main/java/com/eazypermissions/coroutinespermission/PermissionManager.kt) from your coroutines or other suspending function which will return [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt). It takes 3 parameters.
 1. An instance of AppCompactActivity or Fragment depending on from where you are requesting permission.
@@ -125,6 +138,10 @@ override fun setupObserver(permissionResultLiveData: LiveData<PermissionResult>)
 If you don't then library will throw `IllegalArgumentException` stating that you have to implement [`PermissionObserver`](https://github.com/sagar-viradiya/eazypermissions/blob/e1a36d5fb3ad487ac22da9b18e9b4c848cfcb74c/livedatapermission/src/main/java/com/eazypermissions/livedatapermission/PermissionManager.kt#L115)
 
 Library will take care of Activity/Fragment recreation so even if user rotates screen or due to some other reason if your Activity/Fragment gets recreated it will call `setupObserver` method to register new observer of LiveData.
+
+## Contributing
+Have suggestions for improvements and want to contribute? or Found any issues?  
+Head over to [Contribution guidelines](CONTRIBUTING.md) to know more about contributing to this library.
 
 ## Screenshots of sample
 To do - Add screenshots once done with sample app
