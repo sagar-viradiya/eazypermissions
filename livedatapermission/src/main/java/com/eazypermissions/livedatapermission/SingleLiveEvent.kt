@@ -1,5 +1,3 @@
-package com.eazypermissions.livedatapermission
-
 /*
  *  Copyright 2017 Google Inc.
  *
@@ -15,6 +13,8 @@ package com.eazypermissions.livedatapermission
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
+package com.eazypermissions.livedatapermission
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
