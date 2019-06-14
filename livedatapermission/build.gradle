@@ -9,10 +9,10 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 20
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionName rootProject.ext.livedatapermission_version_name
+        versionCode rootProject.ext.livedatapermission_version_code
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -50,3 +50,36 @@ ktlint {
     reporters = [ReporterType.CHECKSTYLE]
 }
 
+
+// Bintray info
+final def LIB_MODULE_NAME = 'livedatapermission'
+final def LIB_MODULE_DESC = 'Android library to request permissions and observe the result as livedata'
+
+ext {
+    bintrayRepo = 'eazypermissions'
+    bintrayName = LIB_MODULE_NAME
+
+    publishedGroupId = GROUP
+    libraryName = LIB_MODULE_NAME
+    artifact = LIB_MODULE_NAME // Has to be same as your library module nameOfLib
+
+    libraryDescription = LIB_MODULE_DESC
+
+    // Your github repo link
+    siteUrl = rootProject.ext.libPomUrl
+    gitUrl = rootProject.ext.libPomGitUrl
+    githubRepository = rootProject.ext.libGithubRepo
+
+    libraryVersion = rootProject.ext.coroutinespermission_version_name
+
+    developerId = POM_DEVELOPER_ID
+    developerName = POM_DEVELOPER_NAME
+    developerEmail = POM_DEVELOPER_EMAILID
+
+    licenseName = POM_LICENCE_NAME
+    licenseUrl = POM_LICENCE_URL
+    allLicenses = [POM_ALL_LICENCES]
+}
+
+apply from: '../scripts/installv1.gradle'
+apply from: '../scripts/bintrayv1.gradle'
