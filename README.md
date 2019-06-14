@@ -8,13 +8,11 @@ Eazy permissions is available in the Jcenter and divided into two modules so tha
 
 ```groovy
 //For coroutines
-implementation "com.sagar:coroutinespermission:[latest_version]"
+implementation 'com.sagar:coroutinespermission:1.0.0'
 
 //For LiveData
-implementation "com.sagar:livedatapermission:[latest_version]"
+implementation 'com.sagar:livedatapermission:1.0.0'
 ```
-- `latest_version` for coroutines -
-- `latest_version` for livedata - 
 
 ## Coroutines support
 Requesting permission is just a simple function call to suspending function `requestPermissions` of [`PermissionManager`](coroutinespermission/src/main/java/com/eazypermissions/coroutinespermission/PermissionManager.kt) from your coroutines or other suspending function which will return [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt). It takes 3 parameters.
