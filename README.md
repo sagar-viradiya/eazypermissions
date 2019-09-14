@@ -1,5 +1,6 @@
 # Eazy Runtime Permission
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/sagar-viradiya/eazypermissions/blob/master/LICENSE) [![Build Status](https://travis-ci.com/sagar-viradiya/eazypermissions.svg?token=VppdY5VoQBEp72REmqxi&branch=master)](https://travis-ci.com/sagar-viradiya/eazypermissions) [![API](https://img.shields.io/badge/API-20%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=20) [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/) [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-eazypermissions-green.svg?style=flat )]( https://android-arsenal.com/details/1/7799 )
+> This is non-androidX version of library to support folks who are still on support of support lib :smile:. New features and bug fixes will be available for this version also but not for long so I would highly recommend folks to move to androidX ASAP. 
 
 A lightweight Android library which wraps boilerplate code of runtime permission and allows you to request permissions from coroutines (No callbacks yay :tada:) or request and observe permissions through LiveData.
 
