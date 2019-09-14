@@ -16,11 +16,11 @@
 
 package com.eazypermissions.livedatapermission
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import android.content.Context
-import android.support.annotation.MainThread
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.MainThread
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.eazypermissions.common.BasePermissionManager
 import com.eazypermissions.common.model.PermissionResult
 
@@ -40,7 +40,7 @@ class PermissionManager : BasePermissionManager() {
         permissionResultLiveEvent.postValue(permissionResult)
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (parentFragment != null) {
             (parentFragment as PermissionObserver).setupObserver(permissionResultLiveEvent)
