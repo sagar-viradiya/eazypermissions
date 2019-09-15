@@ -16,8 +16,8 @@
 
 package com.eazypermissions.coroutinespermission
 
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.eazypermissions.common.BasePermissionManager
 import com.eazypermissions.common.model.PermissionResult
 import kotlinx.coroutines.CompletableDeferred
