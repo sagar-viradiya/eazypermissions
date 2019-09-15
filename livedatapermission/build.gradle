@@ -30,7 +30,7 @@ android {
         versionName rootProject.ext.livedatapermission_version_name
         versionCode rootProject.ext.livedatapermission_version_code
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
@@ -51,10 +51,11 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(':common')
-    implementation 'android.arch.lifecycle:livedata:1.1.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.1.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 repositories {
     mavenCentral()
