@@ -3,6 +3,8 @@
 
 A lightweight Android library which wraps boilerplate code of runtime permission and allows you to request permissions from coroutines (No callbacks yay :tada:) or request and observe permissions through LiveData.
 
+> From release `2.0.0` onwards library is migrated to AndroidX. If you are still using support library and haven't migrated to AndroidX then check out non-androidX version of the [library](https://github.com/sagar-viradiya/eazypermissions/tree/master-nonandroidx).
+
 ## Including in your project
 Eazy permissions is available in the Jcenter and divided into two modules so that based on your need you can include either coroutines or livedata in your project
 
