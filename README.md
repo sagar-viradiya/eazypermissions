@@ -9,13 +9,13 @@ Eazy permissions is available in the Jcenter and divided into two modules so tha
 
 ```groovy
 //For coroutines
-implementation 'com.sagar:coroutinespermission:[latest_version]'
+implementation 'com.sagar:coroutinespermission:[version]'
 
 //For LiveData
-implementation 'com.sagar:livedatapermission:[latest_version]'
+implementation 'com.sagar:livedatapermission:[version]'
 ```
-- `latest_version` for coroutines - [ ![Download](https://api.bintray.com/packages/sagar-viradiya/eazypermissions/coroutinespermission/images/download.svg) ](https://bintray.com/sagar-viradiya/eazypermissions/coroutinespermission/_latestVersion)
-- `latest_version` for livedata - [ ![Download](https://api.bintray.com/packages/sagar-viradiya/eazypermissions/livedatapermission/images/download.svg) ](https://bintray.com/sagar-viradiya/eazypermissions/livedatapermission/_latestVersion)
+- `version` for coroutines - [ ![Download](https://api.bintray.com/packages/sagar-viradiya/eazypermissions/coroutinespermission/images/download.svg?version=1.0.0) ](https://bintray.com/sagar-viradiya/eazypermissions/coroutinespermission/1.0.0/link)
+- `version` for livedata - [ ![Download](https://api.bintray.com/packages/sagar-viradiya/eazypermissions/livedatapermission/images/download.svg?version=1.0.0) ](https://bintray.com/sagar-viradiya/eazypermissions/livedatapermission/1.0.0/link)
 
 ## Coroutines support
 Requesting permission is just a simple function call to suspending function `requestPermissions` of [`PermissionManager`](coroutinespermission/src/main/java/com/eazypermissions/coroutinespermission/PermissionManager.kt) from your coroutines or other suspending function which will return [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt). It takes 3 parameters.
