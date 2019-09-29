@@ -16,16 +16,16 @@
 
 package com.eazypermissions.common.model
 
-sealed class PermissionResult {
-    class PermissionGranted(val requestId: Int) : PermissionResult()
+sealed class PermissionResult(val requestId: Int) {
+    class PermissionGranted(requestId: Int) : PermissionResult(requestId)
     class PermissionDenied(
-        val requestId: Int,
+        requestId: Int,
         val deniedPermissions: List<String>
-    ) : PermissionResult()
+    ) : PermissionResult(requestId)
 
-    class ShowRational(val requestId: Int) : PermissionResult()
+    class ShowRational(requestId: Int) : PermissionResult(requestId)
     class PermissionDeniedPermanently(
-        val requestId: Int,
+        requestId: Int,
         val permanentlyDeniedPermissions: List<String>
-    ) : PermissionResult()
+    ) : PermissionResult(requestId)
 }

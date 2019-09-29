@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
-include ':livedatapermission', ':sample', ':common', ':coroutinespermission', ':dsl'
+package com.eazypermissions.dsl.model
 
+import com.eazypermissions.common.model.PermissionResult
 
+class PermissionRequest(
+    var permissions: Array<String>? = null,
+    var requestCode: Int? = null,
+    var result: (PermissionResult.() -> Unit)? = null
+)
