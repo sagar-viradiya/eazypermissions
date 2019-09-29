@@ -117,18 +117,15 @@ class PermissionManager : BasePermissionManager() {
                     *permissions
                 )
             } else {
-                if (activityOrFragment !is PermissionObserver) {
-                    throw IllegalArgumentException(
-                        "Activity/Fragment must implement PermissionObserver"
-                    )
-                } else {
-                    val permissionManager = PermissionManager()
-                    fragmentManager.beginTransaction().add(
-                        permissionManager,
-                        TAG
-                    ).commitNow()
-                    permissionManager.requestPermissions(requestId, *permissions)
+                require(activityOrFragment is PermissionObserver) {
+                    "Activity/Fragment must implement PermissionObserver"
                 }
+                val permissionManager = PermissionManager()
+                fragmentManager.beginTransaction().add(
+                    permissionManager,
+                    TAG
+                ).commitNow()
+                permissionManager.requestPermissions(requestId, *permissions)
             }
         }
     }
