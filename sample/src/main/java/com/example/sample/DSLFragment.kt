@@ -44,44 +44,39 @@ class DSLFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         location_permission_btn.setOnClickListener {
-            requestPermissions {
-                permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+            requestPermissions(Manifest.permission.ACCESS_FINE_LOCATION) {
                 requestCode = 1
-                result = {
+                resultCallback = {
                     handlePermissionsResult(this)
                 }
             }
         }
 
         contact_permission_btn.setOnClickListener {
-            requestPermissions {
-                permissions = arrayOf(Manifest.permission.READ_CONTACTS)
+            requestPermissions(Manifest.permission.READ_CONTACTS) {
                 requestCode = 2
-                result = {
+                resultCallback = {
                     handlePermissionsResult(this)
                 }
             }
         }
 
         camera_permission_btn.setOnClickListener {
-            requestPermissions {
-                permissions = arrayOf(Manifest.permission.CAMERA)
+            requestPermissions(Manifest.permission.CAMERA) {
                 requestCode = 3
-                result = {
+                resultCallback = {
                     handlePermissionsResult(this)
                 }
             }
         }
 
         location_contact_camera_permission_btn.setOnClickListener {
-            requestPermissions {
-                permissions = arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.READ_CONTACTS,
-                    Manifest.permission.CAMERA
-                )
+            requestPermissions(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.READ_CONTACTS,
+                Manifest.permission.CAMERA) {
                 requestCode = 4
-                result = {
+                resultCallback = {
                     handlePermissionsResult(this)
                 }
             }

@@ -19,7 +19,6 @@ package com.eazypermissions.dsl.model
 import com.eazypermissions.common.model.PermissionResult
 
 class PermissionRequest(
-    var permissions: Array<String>? = null,
     var requestCode: Int? = null,
-    var result: (PermissionResult.() -> Unit)? = null
+    var resultCallback: (PermissionResult.() -> Unit)? = null
 )

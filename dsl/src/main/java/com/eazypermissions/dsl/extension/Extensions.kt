@@ -22,15 +22,23 @@ import com.eazypermissions.dsl.PermissionManager
 import com.eazypermissions.dsl.model.PermissionRequest
 
 /**
+ * @param permissions vararg of all the permissions for request.
  * @param requestBlock block constructing [PermissionRequest] object for permission request.
  */
-fun AppCompatActivity.requestPermissions(requestBlock: PermissionRequest.() -> Unit) {
-    PermissionManager.requestPermissions(this, requestBlock)
+inline fun AppCompatActivity.requestPermissions(
+    vararg  permissions: String,
+    requestBlock: PermissionRequest.() -> Unit
+) {
+    PermissionManager.requestPermissions(this, *permissions) { this.requestBlock() }
 }
 
 /**
+ * @param permissions vararg of all the permissions for request.
  * @param requestBlock block constructing [PermissionRequest] object for permission request.
  */
-fun Fragment.requestPermissions(requestBlock: PermissionRequest.() -> Unit) {
-    PermissionManager.requestPermissions(this, requestBlock)
+inline fun Fragment.requestPermissions(
+    vararg  permissions: String,
+    requestBlock: PermissionRequest.() -> Unit
+) {
+    PermissionManager.requestPermissions(this, *permissions) { this.requestBlock() }
 }

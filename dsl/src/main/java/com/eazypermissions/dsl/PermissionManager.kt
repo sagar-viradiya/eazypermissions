@@ -48,65 +48,66 @@ class PermissionManager : BasePermissionManager() {
         private const val TAG = "PermissionManager"
 
         /**
-         * A static factory method to request permission for activity.
+         * A static factory inline method to request permission for activity.
          *
          * @param activity an instance of [AppCompatActivity]
+         * @param permissions vararg of all permissions for request
          * @param requestBlock [PermissionRequest] block for permission request
          *
          */
         @JvmStatic
         @MainThread
-        fun requestPermissions(
+        inline fun requestPermissions(
             activity: AppCompatActivity,
+            vararg permissions: String,
             requestBlock: PermissionRequest.() -> Unit
         ) {
             val permissionRequest = PermissionRequest().apply(requestBlock)
-            requireNotNull(permissionRequest.permissions) {
-                "No permission specified."
-            }
             requireNotNull(permissionRequest.requestCode) {
                 "No request code specified."
             }
-            requireNotNull(permissionRequest.result) {
+            requireNotNull(permissionRequest.resultCallback) {
                 "No result callback found."
             }
             _requestPermissions(
                 activity,
                 permissionRequest.requestCode!!,
-                permissionRequest.result!!,
-                *permissionRequest.permissions!!
+                permissionRequest.resultCallback!!,
+                *permissions
             )
         }
 
         /**
-         * A static factory method to request permission for fragment.
+         * A static factory inline method to request permission for fragment.
          *
          * @param fragment an instance of [Fragment]
+         * @param permissions vararg of all permissions for request
          * @param requestBlock [PermissionRequest] block for permission request
          *
          */
         @JvmStatic
         @MainThread
-        fun requestPermissions(fragment: Fragment, requestBlock: PermissionRequest.() -> Unit) {
+        inline fun requestPermissions(
+            fragment: Fragment,
+            vararg permissions: String,
+            requestBlock: PermissionRequest.() -> Unit
+        ) {
             val permissionRequest = PermissionRequest().apply(requestBlock)
-            requireNotNull(permissionRequest.permissions) {
-                "No permission specified."
-            }
             requireNotNull(permissionRequest.requestCode) {
                 "No request code specified."
             }
-            requireNotNull(permissionRequest.result) {
+            requireNotNull(permissionRequest.resultCallback) {
                 "No result callback found."
             }
             _requestPermissions(
                 fragment,
                 permissionRequest.requestCode!!,
-                permissionRequest.result!!,
-                *permissionRequest.permissions!!
+                permissionRequest.resultCallback!!,
+                *permissions
             )
         }
 
-        private fun _requestPermissions(
+        fun _requestPermissions(
             activityOrFragment: Any,
             requestId: Int,
             callback: PermissionResult.() -> Unit,
