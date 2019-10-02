@@ -136,4 +136,3 @@ class PermissionManager : BasePermissionManager() {
         callbackMap.clear()
     }
 }
-
