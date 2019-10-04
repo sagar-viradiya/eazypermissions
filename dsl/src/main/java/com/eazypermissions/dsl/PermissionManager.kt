@@ -32,10 +32,10 @@ class PermissionManager : BasePermissionManager() {
     private var callbackMap = mutableMapOf<Int, PermissionResult.() -> Unit>()
 
     override fun onPermissionResult(permissionResult: PermissionResult) {
-        callbackMap[permissionResult.requestId]?.let {
+        callbackMap[permissionResult.requestCode]?.let {
             permissionResult.it()
         }
-        callbackMap.remove(permissionResult.requestId)
+        callbackMap.remove(permissionResult.requestCode)
     }
 
     override fun onAttach(context: Context) {

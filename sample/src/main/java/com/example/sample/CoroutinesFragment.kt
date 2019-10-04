@@ -118,7 +118,7 @@ class CoroutinesFragment : Fragment() {
                     .setMessage("We need permission")
                     .setTitle("Rational")
                     .setPositiveButton("OK") { _, _ ->
-                        when (permissionResult.requestId) {
+                        when (permissionResult.requestCode) {
                             1 -> {
                                 coroutineScope.launch(Dispatchers.Main) {
                                     handleResult(
