@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-package com.eazypermissions.common.model
+package com.eazypermissions.dsl.model
 
-sealed class PermissionResult(val requestCode: Int) {
-    class PermissionGranted(requestCode: Int) : PermissionResult(requestCode)
-    class PermissionDenied(
-        requestCode: Int,
-        val deniedPermissions: List<String>
-    ) : PermissionResult(requestCode)
+import com.eazypermissions.common.model.PermissionResult
 
-    class ShowRational(requestCode: Int) : PermissionResult(requestCode)
-    class PermissionDeniedPermanently(
-        requestCode: Int,
-        val permanentlyDeniedPermissions: List<String>
-    ) : PermissionResult(requestCode)
-}
+/**
+ * Represents permission request encapsulating [requestCode] and
+ * [resultCallback] for a permission request.
+ */
+class PermissionRequest(
+    var requestCode: Int? = null,
+    var resultCallback: (PermissionResult.() -> Unit)? = null
+)

@@ -84,7 +84,7 @@ public class LivedataFragmentJava extends Fragment implements PermissionManager.
                         .setMessage("We need permission")
                         .setTitle("Rational")
                         .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
-                switch (((PermissionResult.ShowRational) permissionResult).getRequestId()) {
+                switch (permissionResult.getRequestCode()) {
                     case 1:
                         alertDialogBuilder.setPositiveButton("OK", (dialogInterface, i) ->
                                 PermissionManager.requestPermissions(

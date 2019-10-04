@@ -86,7 +86,7 @@ class LivedataFragment : Fragment(), PermissionManager.PermissionObserver {
                         .setNegativeButton("Cancel") { dialog, _ ->
                             dialog.dismiss()
                         }
-                    when (it.requestId) {
+                    when (it.requestCode) {
                         1 -> {
                             alertDialogBuilder
                                 .setPositiveButton("OK") { _, _ ->

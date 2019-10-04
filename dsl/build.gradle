@@ -19,19 +19,17 @@ import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'org.jlleitschuh.gradle.ktlint'
-
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionName rootProject.ext.livedatapermission_version_name
-        versionCode rootProject.ext.livedatapermission_version_code
+        versionCode rootProject.ext.dslpermission_version_code
+        versionName rootProject.ext.dslpermission_version_name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        consumerProguardFiles 'consumer-rules.pro'
     }
 
     buildTypes {
@@ -40,10 +38,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
     compileOptions {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 
 }
@@ -51,14 +48,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(':common')
-    implementation 'androidx.lifecycle:lifecycle-livedata:2.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-}
-repositories {
-    mavenCentral()
 }
 
 ktlint {
@@ -67,10 +60,9 @@ ktlint {
     reporters = [ReporterType.CHECKSTYLE]
 }
 
-
 // Bintray info
-final def LIB_MODULE_NAME = 'livedatapermission'
-final def LIB_MODULE_DESC = 'Android library to request permissions and observe the result as livedata'
+final def LIB_MODULE_NAME = 'dslpermission'
+final def LIB_MODULE_DESC = 'Android library to request permissions using Kotlin DSL.'
 
 ext {
     bintrayRepo = 'eazypermissions'
