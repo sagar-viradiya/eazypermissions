@@ -24,6 +24,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.eazypermissions.common.model.PermissionResult
 import com.eazypermissions.dsl.extension.requestPermissions
 import kotlinx.android.synthetic.main.fragment_ui.*
@@ -74,7 +75,8 @@ class DSLFragment : Fragment() {
             requestPermissions(
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.READ_CONTACTS,
-                Manifest.permission.CAMERA) {
+                Manifest.permission.CAMERA
+            ) {
                 requestCode = 4
                 resultCallback = {
                     handlePermissionsResult(this)
@@ -84,7 +86,7 @@ class DSLFragment : Fragment() {
     }
 
     private fun handlePermissionsResult(permissionResult: PermissionResult) {
-        when(permissionResult) {
+        when (permissionResult) {
             is PermissionResult.PermissionGranted -> {
                 Toast.makeText(requireContext(), "Granted!", Toast.LENGTH_LONG).show()
             }
@@ -92,7 +94,43 @@ class DSLFragment : Fragment() {
                 Toast.makeText(requireContext(), "Denied", Toast.LENGTH_SHORT).show()
             }
             is PermissionResult.ShowRational -> {
-                Toast.makeText(requireContext(), "Rational", Toast.LENGTH_SHORT).show()
+                AlertDialog.Builder(requireContext())
+                    .setMessage("We need permission")
+                    .setTitle("Rational")
+                    .setNegativeButton("Cancel") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .setPositiveButton("OK") { _, _ ->
+                        val permissions = when (permissionResult.requestCode) {
+                            1 -> {
+                                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+                            }
+                            2 -> {
+                                arrayOf(Manifest.permission.READ_CONTACTS)
+                            }
+                            3 -> {
+                                arrayOf(Manifest.permission.CAMERA)
+                            }
+                            4 -> {
+                                arrayOf(
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.READ_CONTACTS,
+                                    Manifest.permission.CAMERA
+                                )
+                            }
+                            else -> {
+                                arrayOf()
+                            }
+                        }
+                        requestPermissions(*permissions) {
+                            requestCode = permissionResult.requestCode
+                            resultCallback = {
+                                handlePermissionsResult(this)
+                            }
+                        }
+                    }
+                    .create()
+                    .show()
             }
             is PermissionResult.PermissionDeniedPermanently -> {
                 Toast.makeText(requireContext(), "Denied permanently", Toast.LENGTH_SHORT)
