@@ -79,7 +79,7 @@ ext {
     gitUrl = rootProject.ext.libPomGitUrl
     githubRepository = rootProject.ext.libGithubRepo
 
-    libraryVersion = rootProject.ext.coroutinespermission_version_name
+    libraryVersion = rootProject.ext.dslpermission_version_name
 
     developerId = POM_DEVELOPER_ID
     developerName = POM_DEVELOPER_NAME
