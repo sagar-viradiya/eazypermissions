@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-include ':livedatapermission', ':sample', ':common', ':coroutinespermission', ':dsl'
+include ':livedatapermission', ':sample', ':common', ':coroutinespermission', ':dslpermission'
 
 

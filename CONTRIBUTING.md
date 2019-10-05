@@ -8,7 +8,7 @@ At a high level, this project is divided into 5 modules(including sample module)
 1. common - As you must have guessed this module contains common things shared by coroutinepermission and livedatapermission module.
 2. coroutinepermission - Contains coroutines specific implementation for requesting and observing permission.
 3. livedatapermission - Contains livedata specific implementation for requesting and observing permission.
-4. dsl - Contains Kotlin DSL specific implementation for requesting and observing permission.
+4. dslpermission - Contains Kotlin DSL specific implementation for requesting and observing permission.
 5. sample - Shows how to use library.
 
 ## How Can I Contribute?
