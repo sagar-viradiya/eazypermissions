@@ -1,12 +1,15 @@
 # Eazy Runtime Permission
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/sagar-viradiya/eazypermissions/blob/master/LICENSE) [![Build Status](https://travis-ci.com/sagar-viradiya/eazypermissions.svg?token=VppdY5VoQBEp72REmqxi&branch=master)](https://travis-ci.com/sagar-viradiya/eazypermissions) [![API](https://img.shields.io/badge/API-20%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=20) [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/) [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-eazypermissions-green.svg?style=flat )]( https://android-arsenal.com/details/1/7799 )
 
-A lightweight Android library which wraps boilerplate code of runtime permission and allows you to request permissions from coroutines (No callbacks yay :tada:) or request and observe permissions through LiveData.
+A lightweight Android library which wraps boilerplate code of runtime permission and allows you to request permissions 
+1. from coroutines. (No callbacks yay :tada:)
+2. request and observe permissions through LiveData.
+3. through clean and concise Kotlin DSL.
 
 > From release `2.0.0` onwards library is migrated to AndroidX. If you are still using support library and haven't migrated to AndroidX then check out non-androidX version of the [library](https://github.com/sagar-viradiya/eazypermissions/tree/master-nonandroidx).
 
 ## Including in your project
-Eazy permissions is available in the Jcenter and divided into two modules so that based on your need you can include either coroutines or livedata in your project
+Eazy permissions is available in the Jcenter and divided into two modules so that based on your need you can include either coroutines or livedata or Kotlin DSL support in your project
 
 ```groovy
 //For coroutines
@@ -14,9 +17,13 @@ implementation 'com.sagar:coroutinespermission:[latest_version]'
 
 //For LiveData
 implementation 'com.sagar:livedatapermission:[latest_version]'
+
+//For Kotlin DSL
+implementation 'com.sagar.dslpermission:[latest_version]'
 ```
 - `latest_version` for coroutines - [ ![Download](https://api.bintray.com/packages/sagar-viradiya/eazypermissions/coroutinespermission/images/download.svg) ](https://bintray.com/sagar-viradiya/eazypermissions/coroutinespermission/_latestVersion)
 - `latest_version` for livedata - [ ![Download](https://api.bintray.com/packages/sagar-viradiya/eazypermissions/livedatapermission/images/download.svg) ](https://bintray.com/sagar-viradiya/eazypermissions/livedatapermission/_latestVersion)
+- `latest_version` for Kotlin DSL
 
 ## Coroutines support
 Requesting permission is just a simple function call to suspending function `requestPermissions` of [`PermissionManager`](coroutinespermission/src/main/java/com/eazypermissions/coroutinespermission/PermissionManager.kt) from your coroutines or other suspending function which will return [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt). It takes 3 parameters.
@@ -65,11 +72,18 @@ You can request permission from coroutine launched using any dispatcher(IO/Defau
 
 Library exposes [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt) as result of permission request which is nothing but simple sealed class which wraps all possible outcomes.
 ```kotlin
-sealed class PermissionResult {
-    class PermissionGranted(val requestId: Int) : PermissionResult()
-    class PermissionDenied(val requestId: Int, val deniedPermissions: List<String>) : PermissionResult()
-    class ShowRational(val requestId: Int) : PermissionResult()
-    class PermissionDeniedPermanently(val requestId: Int, val permanentlyDeniedPermissions: List<String>) : PermissionResult()
+sealed class PermissionResult(val requestCode: Int) {
+    class PermissionGranted(requestCode: Int) : PermissionResult(requestCode)
+    class PermissionDenied(
+        requestCode: Int,
+        val deniedPermissions: List<String>
+    ) : PermissionResult(requestCode)
+
+    class ShowRational(requestCode: Int) : PermissionResult(requestCode)
+    class PermissionDeniedPermanently(
+        requestCode: Int,
+        val permanentlyDeniedPermissions: List<String>
+    ) : PermissionResult(requestCode)
 }
 ```
 Notice `PermissionDenied` and `PermissionDeniedPermanently` are also exposing list of denied permissions and permanently denied permissions respectively so that you can decide your flow based on denied permissions if you want to.
@@ -140,6 +154,74 @@ override fun setupObserver(permissionResultLiveData: LiveData<PermissionResult>)
 If you don't then library will throw `IllegalArgumentException` stating that you have to implement [`PermissionObserver`](https://github.com/sagar-viradiya/eazypermissions/blob/e1a36d5fb3ad487ac22da9b18e9b4c848cfcb74c/livedatapermission/src/main/java/com/eazypermissions/livedatapermission/PermissionManager.kt#L115)
 
 Library will take care of Activity/Fragment recreation so even if user rotates screen or due to some other reason if your Activity/Fragment gets recreated it will call `setupObserver` method to register new observer of LiveData.
+
+## Kotlin DSL
+You can request permissions from Activity/Fragment as shown below.
+
+```kotlin
+requestPermissions(
+    Manifest.permission.ACCESS_FINE_LOCATION,
+    Manifest.permission.READ_CONTACTS,
+    Manifest.permission.CAMERA
+) {
+    requestCode = 4
+    resultCallback = {
+        when(this) {
+            is PermissionResult.PermissionGranted -> {
+                //Add your logic here after user grants permission(s)
+            }
+            is PermissionResult.PermissionDenied -> {
+                //Add your logic to handle permission denial
+            }
+            is PermissionResult.PermissionDeniedPermanently -> {
+                //Add your logic here if user denied permission(s) permanently.
+                //Ideally you should ask user to manually go to settings and enable permission(s)
+            }
+            is PermissionResult.ShowRational -> {
+                //If user denied permission frequently then she/he is not clear about why you are asking this permission.
+                //This is your chance to explain them why you need permission.
+            }
+        }
+    }
+}
+```
+[`requestPermissions`](https://github.com/sagar-viradiya/eazypermissions/blob/a3218042f2659fde267c021f5fbefd3069250dcd/dsl/src/main/java/com/eazypermissions/dsl/extension/Extensions.kt#L28) is an extension function on Activity/Fragment. It takes two arguments
+1. `vararg` of permissions.
+2. Lambda with a receiver on [`PermissionRequest`](dsl/src/main/java/com/eazypermissions/dsl/model/PermissionRequest.kt). 
+
+Within lambda you need to initialize `requestCode` and `resultCallback`. Library will invoke `resultCallback` upon permission result. `resultCallback` is lambda with a receiver on [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt) so you have direct access to [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt) as `this` within lambda. [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt) is simple sealed class which wraps all possible outcomes as shown in above code snippet.
+
+If you are requesting permissions outside Activity/Fragment then use the following DSL.
+
+```kotlin
+PermissionManager.requestPermissions(
+    fragment,   //Instance of Activity or Fragment
+    Manifest.permission.ACCESS_FINE_LOCATION,
+    Manifest.permission.READ_CONTACTS,
+    Manifest.permission.CAMERA
+) {
+    requestCode = 4
+    resultCallback = {
+        when(this) {
+            is PermissionResult.PermissionGranted -> {
+                //Add your logic here after user grants permission(s)
+            }
+            is PermissionResult.PermissionDenied -> {
+                //Add your logic to handle permission denial
+            }
+            is PermissionResult.PermissionDeniedPermanently -> {
+                //Add your logic here if user denied permission(s) permanently.
+                //Ideally you should ask user to manually go to settings and enable permission(s)
+            }
+            is PermissionResult.ShowRational -> {
+                //If user denied permission frequently then she/he is not clear about why you are asking this permission.
+                //This is your chance to explain them why you need permission.
+            }
+        }
+    }
+}
+```
+The only difference here is you need to call `PermissionManager.requestPermissions` which takes an instance of Fragment/Activity as an additional parameter.
 
 ## Contributing
 Have suggestions for improvements and want to contribute? or Found any issues?  
