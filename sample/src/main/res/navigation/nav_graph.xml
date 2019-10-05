@@ -32,6 +32,11 @@
         android:label="Livedata Permissions"
         tools:layout="@layout/fragment_ui" />
     <fragment
+        android:id="@+id/dslFragment"
+        android:name="com.example.sample.DSLFragment"
+        android:label="Kotlin DSL Permissions"
+        tools:layout="@layout/fragment_ui" />
+    <fragment
         android:id="@+id/livedataFragmentJava"
         android:name="com.example.sample.LivedataFragmentJava"
         android:label="Livedata Permissions Java"

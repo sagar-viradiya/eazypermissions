@@ -25,6 +25,9 @@
             android:id="@+id/livedataFragment"
             android:title="Permission using livedata" />
         <item
+            android:id="@+id/dslFragment"
+            android:title="Permission using kotlin DSL"/>
+        <item
             android:id="@+id/livedataFragmentJava"
             android:title="Permission using livedata(Java)"/>
     </group>

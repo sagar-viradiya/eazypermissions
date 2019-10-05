@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-package com.eazypermissions.common.model
+package com.example.dsl
 
-sealed class PermissionResult(val requestCode: Int) {
-    class PermissionGranted(requestCode: Int) : PermissionResult(requestCode)
-    class PermissionDenied(
-        requestCode: Int,
-        val deniedPermissions: List<String>
-    ) : PermissionResult(requestCode)
+import junit.framework.Assert.assertEquals
+import org.junit.Test
 
-    class ShowRational(requestCode: Int) : PermissionResult(requestCode)
-    class PermissionDeniedPermanently(
-        requestCode: Int,
-        val permanentlyDeniedPermissions: List<String>
-    ) : PermissionResult(requestCode)
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * See [testing documentation](http://d.android.com/tools/testing).
+ */
+class ExampleUnitTest {
+    @Test
+    fun addition_isCorrect() {
+        assertEquals(4, 2 + 2)
+    }
 }
