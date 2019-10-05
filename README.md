@@ -9,7 +9,7 @@ A lightweight Android library which wraps boilerplate code of runtime permission
 > From release `2.0.0` onwards library is migrated to AndroidX. If you are still using support library and haven't migrated to AndroidX then check out non-androidX version of the [library](https://github.com/sagar-viradiya/eazypermissions/tree/master-nonandroidx).
 
 ## Including in your project
-Eazy permissions is available in the Jcenter and divided into two modules so that based on your need you can include either coroutines or livedata or Kotlin DSL support in your project
+Eazy permissions is available in the Jcenter and divided into three modules so that based on your need you can include either coroutines or livedata or Kotlin DSL support in your project
 
 ```groovy
 //For coroutines
