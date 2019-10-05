@@ -49,7 +49,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':livedatapermission')
     implementation project(':coroutinespermission')
-    implementation project(':dsl')
+    implementation project(':dslpermission')
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.0-alpha03'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.0-alpha03'
