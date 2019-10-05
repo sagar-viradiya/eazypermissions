@@ -19,7 +19,7 @@ implementation 'com.sagar:coroutinespermission:[latest_version]'
 implementation 'com.sagar:livedatapermission:[latest_version]'
 
 //For Kotlin DSL
-implementation 'com.sagar.dslpermission:[latest_version]'
+implementation 'com.sagar:dslpermission:[latest_version]'
 ```
 - `latest_version` for coroutines - [ ![Download](https://api.bintray.com/packages/sagar-viradiya/eazypermissions/coroutinespermission/images/download.svg) ](https://bintray.com/sagar-viradiya/eazypermissions/coroutinespermission/_latestVersion)
 - `latest_version` for livedata - [ ![Download](https://api.bintray.com/packages/sagar-viradiya/eazypermissions/livedatapermission/images/download.svg) ](https://bintray.com/sagar-viradiya/eazypermissions/livedatapermission/_latestVersion)
