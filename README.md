@@ -23,7 +23,7 @@ implementation 'com.sagar:dslpermission:[latest_version]'
 ```
 - `latest_version` for coroutines - [ ![Download](https://api.bintray.com/packages/sagar-viradiya/eazypermissions/coroutinespermission/images/download.svg) ](https://bintray.com/sagar-viradiya/eazypermissions/coroutinespermission/_latestVersion)
 - `latest_version` for livedata - [ ![Download](https://api.bintray.com/packages/sagar-viradiya/eazypermissions/livedatapermission/images/download.svg) ](https://bintray.com/sagar-viradiya/eazypermissions/livedatapermission/_latestVersion)
-- `latest_version` for Kotlin DSL
+- `latest_version` for Kotlin DSL - [ ![Download](https://api.bintray.com/packages/sagar-viradiya/eazypermissions/dslpermission/images/download.svg) ](https://bintray.com/sagar-viradiya/eazypermissions/dslpermission/_latestVersion)
 
 ## Coroutines support
 Requesting permission is just a simple function call to suspending function `requestPermissions` of [`PermissionManager`](coroutinespermission/src/main/java/com/eazypermissions/coroutinespermission/PermissionManager.kt) from your coroutines or other suspending function which will return [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt). It takes 3 parameters.

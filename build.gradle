@@ -32,14 +32,14 @@ buildscript {
         targetSdkVersion = 29
         compileSdkVersion = 29
 
-        common_version_code = 2
-        common_version_name = '2.0.0'
+        common_version_code = 3
+        common_version_name = '2.0.1'
 
-        coroutinespermission_version_code = 2
-        coroutinespermission_version_name = '2.0.0'
+        coroutinespermission_version_code = 3
+        coroutinespermission_version_name = '2.0.1'
 
-        livedatapermission_version_code = 2
-        livedatapermission_version_name = '2.0.0'
+        livedatapermission_version_code = 3
+        livedatapermission_version_name = '2.0.1'
 
         dslpermission_version_code = 2
         dslpermission_version_name = '2.0.0'
