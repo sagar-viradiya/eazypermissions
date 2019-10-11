@@ -30,9 +30,9 @@ requestPermissions(
 ```
 [`requestPermissions`](https://github.com/sagar-viradiya/eazypermissions/blob/a3218042f2659fde267c021f5fbefd3069250dcd/dsl/src/main/java/com/eazypermissions/dsl/extension/Extensions.kt#L28) is an extension function on Activity/Fragment. It takes two arguments
 1. `vararg` of permissions.
-2. Lambda with a receiver on [`PermissionRequest`](dsl/src/main/java/com/eazypermissions/dsl/model/PermissionRequest.kt). 
+2. Lambda with a receiver on [`PermissionRequest`](../dsl/src/main/java/com/eazypermissions/dsl/model/PermissionRequest.kt). 
 
-Within lambda you need to initialize `requestCode` and `resultCallback`. Library will invoke `resultCallback` upon permission result. `resultCallback` is lambda with a receiver on [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt) so you have direct access to [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt) as `this` within lambda. [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt) is simple sealed class which wraps all possible outcomes as shown in above code snippet.
+Within lambda you need to initialize `requestCode` and `resultCallback`. Library will invoke `resultCallback` upon permission result. `resultCallback` is lambda with a receiver on [`PermissionResult`](../common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt) so you have direct access to [`PermissionResult`](../common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt) as `this` within lambda. [`PermissionResult`](../common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt) is simple sealed class which wraps all possible outcomes as shown in above code snippet.
 
 If you are requesting permissions outside Activity/Fragment then use the following DSL.
 

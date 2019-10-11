@@ -1,5 +1,5 @@
 # Coroutines support
-Requesting permission is just a simple function call to suspending function `requestPermissions` of [`PermissionManager`](coroutinespermission/src/main/java/com/eazypermissions/coroutinespermission/PermissionManager.kt) from your coroutines or other suspending function which will return [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt). It takes 3 parameters.
+Requesting permission is just a simple function call to suspending function `requestPermissions` of [`PermissionManager`](../coroutinespermission/src/main/java/com/eazypermissions/coroutinespermission/PermissionManager.kt) from your coroutines or other suspending function which will return [`PermissionResult`](../common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt). It takes 3 parameters.
 1. An instance of AppCompactActivity or Fragment depending on from where you are requesting permission.
 2. Request id.
 3. varargs of permission you want to request.
@@ -43,7 +43,7 @@ launch {
 ```
 You can request permission from coroutine launched using any dispatcher(IO/Default/Main).
 
-Library exposes [`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt) as result of permission request which is nothing but simple sealed class which wraps all possible outcomes.
+Library exposes [`PermissionResult`](../common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt) as result of permission request which is nothing but simple sealed class which wraps all possible outcomes.
 ```kotlin
 sealed class PermissionResult(val requestCode: Int) {
     class PermissionGranted(requestCode: Int) : PermissionResult(requestCode)
