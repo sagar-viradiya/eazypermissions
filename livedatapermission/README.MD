@@ -1,5 +1,5 @@
 # LiveData support
-Just in case of coroutine we saw above requesting permission is just a simple method call to [`PermissionManager`](../livedatapermission/src/main/java/com/eazypermissions/livedatapermission/PermissionManager.kt) from your Activity/Fragment. It takes 3 parameters.
+Requesting permission is just a simple method call to [`PermissionManager`](../livedatapermission/src/main/java/com/eazypermissions/livedatapermission/PermissionManager.kt) from your Activity/Fragment. It takes 3 parameters.
 1. An instance of AppCompactActivity or Fragment depending from where you are requesting permission.
 2. Request id.
 3. varargs of permission you want to request.
