@@ -35,7 +35,8 @@ class PermissionManager : BasePermissionManager() {
     private lateinit var completableDeferred: CompletableDeferred<PermissionResult>
 
     override fun onPermissionResult(permissionResult: PermissionResult) {
-        completableDeferred.complete(permissionResult)
+        if (::completableDeferred.isInitialized)
+            completableDeferred.complete(permissionResult)
     }
 
     companion object {
@@ -126,7 +127,7 @@ class PermissionManager : BasePermissionManager() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (completableDeferred.isActive) {
+        if (::completableDeferred.isInitialized && completableDeferred.isActive) {
             completableDeferred.cancel()
         }
     }
