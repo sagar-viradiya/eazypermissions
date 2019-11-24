@@ -121,8 +121,8 @@ class PermissionManager : BasePermissionManager() {
     private lateinit var completableDeferred: CompletableDeferred<PermissionResult>
 
     override fun onPermissionResult(permissionResult: PermissionResult) {
-        //When fragment gets recreated due to memory constraints by OS completableDeferred would be
-        //uninitialized and hence check
+        // When fragment gets recreated due to memory constraints by OS completableDeferred would be
+        // uninitialized and hence check
         if (::completableDeferred.isInitialized) {
             completableDeferred.complete(permissionResult)
         }
