@@ -35,8 +35,8 @@ buildscript {
         common_version_code = 3
         common_version_name = '2.0.1'
 
-        coroutinespermission_version_code = 3
-        coroutinespermission_version_name = '2.0.1'
+        coroutinespermission_version_code = 4
+        coroutinespermission_version_name = '2.0.2'
 
         livedatapermission_version_code = 3
         livedatapermission_version_name = '2.0.1'

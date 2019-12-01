@@ -26,24 +26,18 @@ import kotlinx.coroutines.withContext
 
 /**
  * Permission manager which handles checking permission is granted or not and if not then will request permission.
- * This is nothing but a headless fragment which wraps the boilerplate code for checking and requesting permission
+ * A headless fragment which wraps the boilerplate code for checking and requesting permission
  * and suspends the coroutines until result is available.
  * A simple [Fragment] subclass.
  */
 class PermissionManager : BasePermissionManager() {
-
-    private lateinit var completableDeferred: CompletableDeferred<PermissionResult>
-
-    override fun onPermissionResult(permissionResult: PermissionResult) {
-        completableDeferred.complete(permissionResult)
-    }
 
     companion object {
 
         private const val TAG = "PermissionManager"
 
         /**
-         * A static factory method to request permission from activity.
+         * A static method to request permission from activity.
          *
          * @param activity an instance of [AppCompatActivity]
          * @param requestId Request ID for permission request
@@ -68,7 +62,7 @@ class PermissionManager : BasePermissionManager() {
         }
 
         /**
-         * A static factory method to request permission from fragment.
+         * A static method to request permission from fragment.
          *
          * @param fragment an instance of [Fragment]
          * @param requestId Request ID for permission request
@@ -124,9 +118,19 @@ class PermissionManager : BasePermissionManager() {
         }
     }
 
+    private lateinit var completableDeferred: CompletableDeferred<PermissionResult>
+
+    override fun onPermissionResult(permissionResult: PermissionResult) {
+        // When fragment gets recreated due to memory constraints by OS completableDeferred would be
+        // uninitialized and hence check
+        if (::completableDeferred.isInitialized) {
+            completableDeferred.complete(permissionResult)
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        if (completableDeferred.isActive) {
+        if (::completableDeferred.isInitialized && completableDeferred.isActive) {
             completableDeferred.cancel()
         }
     }

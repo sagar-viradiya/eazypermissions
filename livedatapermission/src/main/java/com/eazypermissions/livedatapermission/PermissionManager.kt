@@ -26,7 +26,7 @@ import com.eazypermissions.common.model.PermissionResult
 
 /**
  * Permission manager which handles checking permission is granted or not and if not then will request permission.
- * This is nothing but a headless fragment which wraps the boilerplate code for checking and requesting permission
+ * A headless fragment which wraps the boilerplate code for checking and requesting permission
  * and expose the result of permission request as [LiveData].
  * A simple [Fragment] subclass.
  */
