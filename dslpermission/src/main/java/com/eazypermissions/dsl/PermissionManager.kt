@@ -25,6 +25,7 @@ import com.eazypermissions.common.model.PermissionResult
 import com.eazypermissions.dsl.model.PermissionRequest
 
 /**
+ * A headless fragment which wraps the boilerplate code for checking and requesting permission.
  * A simple [Fragment] subclass.
  */
 class PermissionManager : BasePermissionManager() {
@@ -48,7 +49,7 @@ class PermissionManager : BasePermissionManager() {
         private const val TAG = "PermissionManager"
 
         /**
-         * A static factory inline method to request permission for activity.
+         * A static inline method to request permission for activity.
          *
          * @param activity an instance of [AppCompatActivity]
          * @param permissions vararg of all permissions for request
@@ -78,7 +79,7 @@ class PermissionManager : BasePermissionManager() {
         }
 
         /**
-         * A static factory inline method to request permission for fragment.
+         * A static inline method to request permission for fragment.
          *
          * @param fragment an instance of [Fragment]
          * @param permissions vararg of all permissions for request
