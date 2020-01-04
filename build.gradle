@@ -41,8 +41,8 @@ buildscript {
         livedatapermission_version_code = 3
         livedatapermission_version_name = '2.0.1'
 
-        dslpermission_version_code = 2
-        dslpermission_version_name = '2.0.0'
+        dslpermission_version_code = 3
+        dslpermission_version_name = '2.0.1'
 
     }
 
