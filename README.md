@@ -26,9 +26,9 @@ implementation 'com.sagar:dslpermission:[latest_version]'
 - `latest_version` for Kotlin DSL - [ ![Download](https://api.bintray.com/packages/sagar-viradiya/eazypermissions/dslpermission/images/download.svg) ](https://bintray.com/sagar-viradiya/eazypermissions/dslpermission/_latestVersion)
 
 ## Read more about Coroutines, LiveData & Kotlin DSL
-- [*Coroutines*](coroutinespermission/README.MD)
-- [*LiveData*](livedatapermission/README.MD)
-- [*Kotlin DSL*](dslpermission/README.MD)
+- [*Coroutines*](coroutinespermission)
+- [*LiveData*](livedatapermission)
+- [*Kotlin DSL*](dslpermission)
 
 
 ## Contributing
