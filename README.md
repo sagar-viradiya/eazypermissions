@@ -25,11 +25,136 @@ implementation 'com.sagar:dslpermission:[latest_version]'
 - `latest_version` for livedata - [ ![Download](https://api.bintray.com/packages/sagar-viradiya/eazypermissions/livedatapermission/images/download.svg) ](https://bintray.com/sagar-viradiya/eazypermissions/livedatapermission/_latestVersion)
 - `latest_version` for Kotlin DSL - [ ![Download](https://api.bintray.com/packages/sagar-viradiya/eazypermissions/dslpermission/images/download.svg) ](https://bintray.com/sagar-viradiya/eazypermissions/dslpermission/_latestVersion)
 
-## Read more about Coroutines, LiveData & Kotlin DSL
-- [*Coroutines*](coroutinespermission)
-- [*LiveData*](livedatapermission)
-- [*Kotlin DSL*](dslpermission)
+## Coroutines support
+This is how you would request permission within coroutines.
 
+```kotlin
+.
+.
+.
+launch {
+    //CoroutineScope
+
+    val permissionResult = PermissionManager.requestPermissions(           //Suspends the coroutine
+                            this@Fragment,                                  
+                            REQUEST_ID,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.READ_CONTACTS,
+                            Manifest.permission.CAMERA
+                        )
+                        
+    //Resume coroutine once result is ready
+    when(permissionResult) {
+        is PermissionResult.PermissionGranted -> {
+            //Add your logic here after user grants permission(s)
+        }
+        is PermissionResult.PermissionDenied -> {
+            //Add your logic to handle permission denial
+        }
+        is PermissionResult.PermissionDeniedPermanently -> {
+            //Add your logic here if user denied permission(s) permanently.
+            //Ideally you should ask user to manually go to settings and enable permission(s)
+        }
+        is PermissionResult.ShowRational -> {
+            //If user denied permission frequently then she/he is not clear about why you are asking this permission.
+            //This is your chance to explain them why you need permission.
+        }
+    }
+
+}
+```
+
+Read more about coroutines support [*here*](coroutinespermission)
+
+## Kotlin DSL support
+This is how you would request permission through clean and concise Kotlin DSL.
+
+```kotlin
+requestPermissions(
+    Manifest.permission.ACCESS_FINE_LOCATION,
+    Manifest.permission.READ_CONTACTS,
+    Manifest.permission.CAMERA
+) {
+    requestCode = 4
+    resultCallback = {
+        when(this) {
+            is PermissionResult.PermissionGranted -> {
+                //Add your logic here after user grants permission(s)
+            }
+            is PermissionResult.PermissionDenied -> {
+                //Add your logic to handle permission denial
+            }
+            is PermissionResult.PermissionDeniedPermanently -> {
+                //Add your logic here if user denied permission(s) permanently.
+                //Ideally you should ask user to manually go to settings and enable permission(s)
+            }
+            is PermissionResult.ShowRational -> {
+                //If user denied permission frequently then she/he is not clear about why you are asking this permission.
+                //This is your chance to explain them why you need permission.
+            }
+        }
+    }
+}
+```
+
+Read more about Kotlin DSL support [*here*](dslpermission)
+
+## LiveData support
+This is how you would request permission within Acivity/Fragment.
+
+```kotlin
+PermissionManager.requestPermissions(
+                this,
+                REQUEST_ID,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.READ_CONTACTS
+            )
+```
+
+Observing permission result requires your Actvity/Fragment to implement [`PermissionObserver`](https://github.com/sagar-viradiya/eazypermissions/blob/e1a36d5fb3ad487ac22da9b18e9b4c848cfcb74c/livedatapermission/src/main/java/com/eazypermissions/livedatapermission/PermissionManager.kt#L115)
+
+```kotlin
+/**
+ * Interface definition for a callback to get [LiveData] of [PermissionResult]
+ *
+ * Implement this interface to get [LiveData] for observing permission request result.
+ */
+interface PermissionObserver {
+    fun setupObserver(permissionResultLiveData: LiveData<PermissionResult>)
+}
+```
+Just as you would observe other LiveData you can observe LiveData<[`PermissionResult`](common/src/main/java/com/eazypermissions/common/model/PermissionResult.kt)> as follow.
+```kotlin
+override fun setupObserver(permissionResultLiveData: LiveData<PermissionResult>) {
+    permissionResultLiveData.observe(this, Observer<PermissionResult> {
+        when (it) {
+            is PermissionResult.PermissionGranted -> {
+                if (it.requestId == REQUEST_ID) {
+                    //Add your logic here after user grants permission(s)
+                }
+            }
+            is PermissionResult.PermissionDenied -> {
+                if (it.requestId == REQUEST_ID) {
+                    //Add your logic to handle permission denial
+                }
+            }
+            is PermissionResult.PermissionDeniedPermanently -> {
+                if (it.requestId == REQUEST_ID) {
+                    //Add your logic here if user denied permission(s) permanently.
+                    //Ideally you should ask user to manually go to settings and enable permission(s)
+                }
+            }
+            is PermissionResult.ShowRational -> {
+                if (it.requestId == REQUEST_ID) {
+                    //If user denied permission frequently then she/he is not clear about why you are asking this permission.
+                    //This is your chance to explain them why you need permission.
+                }
+            }
+        }
+    })
+}
+```
+Read more about LiveData support [*here*](livedatapermission)
 
 ## Contributing
 Have suggestions for improvements and want to contribute? or Found any issues?  
